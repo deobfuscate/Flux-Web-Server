@@ -25,7 +25,7 @@ namespace FluxWebServer
         {
             try
             {
-                tcpListener = new TcpListener(IPAddress.Any, 80);
+                tcpListener = new TcpListener(IPAddress.Any, iPort);
                 tcpListener.Start();
             }
             catch (SocketException ex)
@@ -36,7 +36,7 @@ namespace FluxWebServer
                 }
                 else
                 {
-                    _frmMain.Log("Error:" + ex.ToString());
+                    _frmMain.Log("Error: " + ex.ToString());
                 }
                 return false;
             }
