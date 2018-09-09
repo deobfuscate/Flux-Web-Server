@@ -2,6 +2,7 @@
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
+using System.Reflection;
 using System.Text;
 
 namespace FluxWebServer
@@ -80,11 +81,11 @@ namespace FluxWebServer
                 {
                     if (ex is FileNotFoundException || ex is DirectoryNotFoundException || ex is UnauthorizedAccessException)
                     {
-                        bContent = Encoding.UTF8.GetBytes("<html><head><title>404</title></head><body><p>404 Not Found</p></body></html>");
+                        bContent = Encoding.UTF8.GetBytes(ReadEmbeddedFile("404.html"));
                     }
                     else
                     {
-                        bContent = Encoding.UTF8.GetBytes("<html><head><title>Error</title></head><body><p>An error has occured.</p></body></html>");
+                        bContent = Encoding.UTF8.GetBytes(ReadEmbeddedFile("error.html"));
                         _frmMain.Log($"Error: {ex}");
                         return;
                     }
@@ -96,6 +97,18 @@ namespace FluxWebServer
                 nsInput.Close();
             }
             tcpClient.Close();
+        }
+
+        private string ReadEmbeddedFile(string file)
+        {
+            string result;
+            using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream($"FluxWebServer.resources.{file}"))
+            using (StreamReader reader = new StreamReader(stream))
+            {
+                result = reader.ReadToEnd();
+                reader.Close();
+            }
+            return result;
         }
 
         private byte[] JoinByteA(byte[] first, byte[] last)
