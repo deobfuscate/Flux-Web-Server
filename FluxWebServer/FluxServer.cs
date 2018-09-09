@@ -9,34 +9,34 @@ namespace FluxWebServer
     class FluxServer
     {
         private frmMain _frmMain;
-        private int iPort;
-        private string strDir;
+        private int port;
+        private string path;
         private TcpListener tcpListener;
         private bool stoppingListener;
 
-        public FluxServer(frmMain form, int port, string directory)
+        public FluxServer(frmMain form, int port, string path)
         {
             _frmMain = form;
-            iPort = port;
-            strDir = directory;
+            this.port = port;
+            this.path = path;
         }
 
         public bool Start()
         {
             try
             {
-                tcpListener = new TcpListener(IPAddress.Any, iPort);
+                tcpListener = new TcpListener(IPAddress.Any, port);
                 tcpListener.Start();
             }
             catch (SocketException ex)
             {
                 if (ex.ErrorCode == 10048)
                 {
-                    _frmMain.Log("Error: Address is already in use, ensure that the port is open");
+                    _frmMain.Log("Error: Address is already in use, ensure that the port is open.");
                 }
                 else
                 {
-                    _frmMain.Log("Error: " + ex.ToString());
+                    _frmMain.Log($"Error: {ex.ToString()}");
                 }
                 return false;
             }
@@ -66,15 +66,15 @@ namespace FluxWebServer
             byte[] bInput = new byte[tcpClient.Available];
             NetworkStream nsInput = tcpClient.GetStream();
             nsInput.Read(bInput, 0, bInput.Length);
-            string strData = Encoding.UTF8.GetString(bInput);
-            if (new System.Text.RegularExpressions.Regex("^GET").IsMatch(strData))
+            string data = Encoding.UTF8.GetString(bInput);
+            if (new System.Text.RegularExpressions.Regex("^GET").IsMatch(data))
             {
-                string[] strDataW = strData.Split(new char[] { ' ' });
+                string[] strDataW = data.Split(new char[] { ' ' });
                 string strFilePath = strDataW[1];
-                _frmMain.Log("\"" + strDataW[0] + " "+ strDataW[1] + "\" from " + tcpClient.Client.RemoteEndPoint.ToString());
+                _frmMain.Log($"\"{strDataW[0]} {strDataW[1]}\" from {tcpClient.Client.RemoteEndPoint.ToString()}");
                 try
                 {
-                    bContent = File.ReadAllBytes(strDir + strFilePath.Replace("/", @"\"));
+                    bContent = File.ReadAllBytes(path + strFilePath.Replace("/", @"\"));
                 }
                 catch (Exception ex)
                 {
@@ -85,14 +85,12 @@ namespace FluxWebServer
                     else
                     {
                         bContent = Encoding.UTF8.GetBytes("<html><head><title>Error</title></head><body><p>An error has occured.</p></body></html>");
-                        _frmMain.Log("Error: " + ex);
+                        _frmMain.Log($"Error: {ex}");
                         return;
                     }
                 }
 
-                byte[] bHeader = Encoding.UTF8.GetBytes("HTTP/1.1 200 OK\r\n"
-                    + "Content-Length: " + bContent.Length + "\r\n\r\n"
-                    );
+                byte[] bHeader = Encoding.UTF8.GetBytes($"HTTP/1.1 200 OK\r\nContent-Length: {bContent.Length}\r\n\r\n");
                 byte[] bResult = JoinByteA(bHeader, bContent);
                 nsInput.Write(bResult, 0, bResult.Length);
                 nsInput.Close();
@@ -100,11 +98,11 @@ namespace FluxWebServer
             tcpClient.Close();
         }
 
-        private byte[] JoinByteA(byte[] bFirst, byte[] bLast)
+        private byte[] JoinByteA(byte[] first, byte[] last)
         {
-            byte[] bTmp = new byte[bFirst.Length + bLast.Length];
-            Buffer.BlockCopy(bFirst, 0, bTmp, 0, bFirst.Length);
-            Buffer.BlockCopy(bLast, 0, bTmp, bFirst.Length, bLast.Length);
+            byte[] bTmp = new byte[first.Length + last.Length];
+            Buffer.BlockCopy(first, 0, bTmp, 0, first.Length);
+            Buffer.BlockCopy(last, 0, bTmp, first.Length, last.Length);
             return bTmp;
         }
     }
