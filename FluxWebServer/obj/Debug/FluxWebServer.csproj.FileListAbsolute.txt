@@ -1,0 +1,11 @@
+C:\Users\Laptop\Documents\GitHub\Flux-Web-Server\FluxWebServer\bin\Debug\FluxWebServer.exe.config
+C:\Users\Laptop\Documents\GitHub\Flux-Web-Server\FluxWebServer\bin\Debug\FluxWebServer.exe
+C:\Users\Laptop\Documents\GitHub\Flux-Web-Server\FluxWebServer\bin\Debug\FluxWebServer.pdb
+C:\Users\Laptop\Documents\GitHub\Flux-Web-Server\FluxWebServer\obj\Debug\FluxWebServer.csprojAssemblyReference.cache
+C:\Users\Laptop\Documents\GitHub\Flux-Web-Server\FluxWebServer\obj\Debug\FluxWebServer.frmMain.resources
+C:\Users\Laptop\Documents\GitHub\Flux-Web-Server\FluxWebServer\obj\Debug\FluxWebServer.frmSettings.resources
+C:\Users\Laptop\Documents\GitHub\Flux-Web-Server\FluxWebServer\obj\Debug\FluxWebServer.Properties.Resources.resources
+C:\Users\Laptop\Documents\GitHub\Flux-Web-Server\FluxWebServer\obj\Debug\FluxWebServer.csproj.GenerateResource.cache
+C:\Users\Laptop\Documents\GitHub\Flux-Web-Server\FluxWebServer\obj\Debug\FluxWebServer.csproj.CoreCompileInputs.cache
+C:\Users\Laptop\Documents\GitHub\Flux-Web-Server\FluxWebServer\obj\Debug\FluxWebServer.exe
+C:\Users\Laptop\Documents\GitHub\Flux-Web-Server\FluxWebServer\obj\Debug\FluxWebServer.pdb
