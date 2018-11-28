@@ -54,7 +54,8 @@ namespace FluxWebServer
 
         private void ManageClient(IAsyncResult iarStatus)
         {
-                                                                                                    Console.WriteLine("=== Incoming connection");
+            //Debugging
+            Console.WriteLine("=== Incoming connection");
             if (stoppingListener)
             {
                 stoppingListener = false;
@@ -69,7 +70,8 @@ namespace FluxWebServer
             NetworkStream nsInput = tcpClient.GetStream();
             nsInput.Read(bInput, 0, bInput.Length);
             string data = Encoding.UTF8.GetString(bInput);
-                                                                                                                      Console.WriteLine($"<-- {data} from {tcpClient.Client.Handle}");
+            //Debugging
+            Console.WriteLine($"<-- {data} from {tcpClient.Client.Handle}");
             if (new System.Text.RegularExpressions.Regex("^GET").IsMatch(data))
             {
                 string[] strDataW = data.Split(new char[] { ' ' });
