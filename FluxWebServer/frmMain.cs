@@ -42,13 +42,15 @@ namespace FluxWebServer
                 }
                 fluxServer = new FluxServer(port, path);
                 fluxServer.LogMessage += c_LogMessage;
-                fluxServer.Start();
-                isRunning = true;
-                lblStatus.ForeColor = Color.Green;
-                lblStatus.Text = "Online";
-                tmrUptime.Start();
-                btnStart.Text = "Stop";
-                Log("Web server started");
+                if (fluxServer.Start())
+                {
+                    isRunning = true;
+                    lblStatus.ForeColor = Color.Green;
+                    lblStatus.Text = "Online";
+                    tmrUptime.Start();
+                    btnStart.Text = "Stop";
+                    Log("Web server started");
+                }
             }
             else
             {
