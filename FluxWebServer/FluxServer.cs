@@ -9,15 +9,13 @@ namespace FluxWebServer
 {
     class FluxServer
     {
-        private frmMain _frmMain;
         private int port;
         private string path;
         private TcpListener tcpListener;
         private bool stoppingListener;
 
-        public FluxServer(frmMain form, int port, string path)
+        public FluxServer(int port, string path)
         {
-            _frmMain = form;
             this.port = port;
             this.path = path;
         }
@@ -32,13 +30,9 @@ namespace FluxWebServer
             catch (SocketException ex)
             {
                 if (ex.ErrorCode == 10048)
-                {
-                    _frmMain.Log("Error: Address is already in use, ensure that the port is open.");
-                }
+                    OnLogMessage(new LogMessageEventArgs("Error: Address is already in use, ensure that the port is open."));
                 else
-                {
-                    _frmMain.Log($"Error: {ex.ToString()}");
-                }
+                    OnLogMessage(new LogMessageEventArgs($"Error: {ex.ToString()}"));
                 return false;
             }
 
@@ -76,7 +70,8 @@ namespace FluxWebServer
             {
                 string[] strDataW = data.Split(new char[] { ' ' });
                 string strFilePath = strDataW[1];
-                _frmMain.Log($"\"{strDataW[0]} {strDataW[1]}\" from {tcpClient.Client.RemoteEndPoint.ToString()}");
+                OnLogMessage(new LogMessageEventArgs($"\"{strDataW[0]} {strDataW[1]}\" from {tcpClient.Client.RemoteEndPoint.ToString()}"));
+
                 try
                 {
                     bContent = File.ReadAllBytes(path + strFilePath.Replace("/", @"\"));
@@ -90,7 +85,7 @@ namespace FluxWebServer
                     else
                     {
                         bContent = Encoding.UTF8.GetBytes(ReadEmbeddedFile("error.html"));
-                        _frmMain.Log($"Error: {ex}");
+                        OnLogMessage(new LogMessageEventArgs($"Error: {ex}"));
                         return;
                     }
                 }
@@ -121,6 +116,25 @@ namespace FluxWebServer
             Buffer.BlockCopy(first, 0, bTmp, 0, first.Length);
             Buffer.BlockCopy(last, 0, bTmp, first.Length, last.Length);
             return bTmp;
+        }
+
+
+        protected virtual void OnLogMessage(LogMessageEventArgs e)
+        {
+            LogMessage?.Invoke(this, e);
+        }
+
+        public event EventHandler<LogMessageEventArgs> LogMessage;
+
+    }
+
+    public class LogMessageEventArgs : EventArgs
+    {
+        public string Message { get; set; }
+
+        public LogMessageEventArgs(string message)
+        {
+            Message = message;
         }
     }
 }

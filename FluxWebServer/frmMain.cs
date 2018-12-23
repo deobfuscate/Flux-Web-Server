@@ -40,7 +40,8 @@ namespace FluxWebServer
                     Log("Error: Port is not set. Go to Tools -> Settings to set.");
                     return;
                 }
-                fluxServer = new FluxServer(this, port, path);
+                fluxServer = new FluxServer(port, path);
+                fluxServer.LogMessage += c_LogMessage;
                 fluxServer.Start();
                 isRunning = true;
                 lblStatus.ForeColor = Color.Green;
@@ -96,6 +97,12 @@ namespace FluxWebServer
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+
+        void c_LogMessage(object sender, LogMessageEventArgs e)
+        {
+            Log(e.Message);
         }
     }
 }
