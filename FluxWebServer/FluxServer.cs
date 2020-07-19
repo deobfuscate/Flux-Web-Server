@@ -13,6 +13,7 @@ namespace FluxWebServer
         private string path;
         private TcpListener tcpListener;
         private bool stoppingListener;
+        public event EventHandler<LogMessageEventArgs> LogMessage;
 
         public FluxServer(int port, string path)
         {
@@ -117,20 +118,16 @@ namespace FluxWebServer
             Buffer.BlockCopy(last, 0, bTmp, first.Length, last.Length);
             return bTmp;
         }
-
-
+        
         protected virtual void OnLogMessage(LogMessageEventArgs e)
         {
             LogMessage?.Invoke(this, e);
         }
-
-        public event EventHandler<LogMessageEventArgs> LogMessage;
-
     }
 
     public class LogMessageEventArgs : EventArgs
     {
-        public string Message { get; set; }
+        public string Message;
 
         public LogMessageEventArgs(string message)
         {
