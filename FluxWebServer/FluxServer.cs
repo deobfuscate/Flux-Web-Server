@@ -49,8 +49,9 @@ namespace FluxWebServer
 
         private void ManageClient(IAsyncResult iarStatus)
         {
-            //Debugging
+#if DEBUG
             Console.WriteLine("=== Incoming connection");
+#endif
             if (stoppingListener)
             {
                 stoppingListener = false;
@@ -65,8 +66,9 @@ namespace FluxWebServer
             NetworkStream nsInput = tcpClient.GetStream();
             nsInput.Read(bInput, 0, bInput.Length);
             string data = Encoding.UTF8.GetString(bInput);
-            //Debugging
+#if DEBUG
             Console.WriteLine($"<-- {data} from {tcpClient.Client.Handle}");
+#endif
             if (new System.Text.RegularExpressions.Regex("^GET").IsMatch(data))
             {
                 string[] strDataW = data.Split(new char[] { ' ' });
@@ -92,7 +94,7 @@ namespace FluxWebServer
                 }
 
                 byte[] bHeader = Encoding.UTF8.GetBytes($"HTTP/1.1 200 OK\r\nContent-Length: {bContent.Length}\r\n\r\n");
-                byte[] bResult = JoinByteA(bHeader, bContent);
+                byte[] bResult = JoinByteArray(bHeader, bContent);
                 nsInput.Write(bResult, 0, bResult.Length);
                 nsInput.Close();
             }
@@ -111,7 +113,7 @@ namespace FluxWebServer
             return result;
         }
 
-        private byte[] JoinByteA(byte[] first, byte[] last)
+        private byte[] JoinByteArray(byte[] first, byte[] last)
         {
             byte[] bTmp = new byte[first.Length + last.Length];
             Buffer.BlockCopy(first, 0, bTmp, 0, first.Length);

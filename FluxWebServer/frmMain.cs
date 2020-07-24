@@ -75,7 +75,7 @@ namespace FluxWebServer
 
         public void Log(string text)
         {
-            txtLog.AppendText($"[{DateTime.Now.ToString()}] {text}{Environment.NewLine}");
+            txtLog.AppendText($"[{DateTime.Now}] {text}{Environment.NewLine}");
         }
 
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
