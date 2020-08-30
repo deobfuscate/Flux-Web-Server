@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
@@ -77,7 +78,21 @@ namespace FluxWebServer
 
                 try
                 {
-                    bContent = File.ReadAllBytes(path + strFilePath.Replace("/", @"\"));
+                    if (strFilePath.Substring(Math.Max(0, strFilePath.Length - 4)) == ".php")
+                    {
+                        Process phpProc = new Process();
+                        phpProc.StartInfo.UseShellExecute = false;
+                        phpProc.StartInfo.RedirectStandardOutput = true;
+                        phpProc.StartInfo.FileName = "php\\php-cgi.exe";
+                        phpProc.StartInfo.Arguments = path + strFilePath;
+                        phpProc.Start();
+                        string phpResult = phpProc.StandardOutput.ReadToEnd();
+                        phpProc.WaitForExit();
+                        bContent = Encoding.UTF8.GetBytes(phpResult);
+                    }
+                    else
+                        bContent = File.ReadAllBytes(path + strFilePath.Replace("/", @"\"));
+
                 }
                 catch (Exception ex)
                 {
@@ -93,7 +108,7 @@ namespace FluxWebServer
                     }
                 }
 
-                byte[] bHeader = Encoding.UTF8.GetBytes($"HTTP/1.1 200 OK\r\nContent-Length: {bContent.Length}\r\n\r\n");
+                byte[] bHeader = Encoding.UTF8.GetBytes($"HTTP/1.1 200 OK\r\nContent-Type: text/html; charset=UTF-8\r\nContent-Length: {bContent.Length}\r\n\r\n");
                 byte[] bResult = JoinByteArray(bHeader, bContent);
                 nsInput.Write(bResult, 0, bResult.Length);
                 nsInput.Close();
