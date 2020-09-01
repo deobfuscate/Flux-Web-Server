@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Reflection;
@@ -56,59 +57,64 @@ namespace FluxWebServer
             if (stoppingListener)
             {
                 stoppingListener = false;
+                Console.WriteLine("WE STOPPIN");
                 return;
             }
             byte[] bContent;
             tcpListener = (TcpListener) iarStatus.AsyncState;
             var tcpClient = tcpListener.EndAcceptTcpClient(iarStatus);
             tcpListener.BeginAcceptTcpClient(ManageClient, tcpListener);
-            
-            byte[] bInput = new byte[tcpClient.Available];
             NetworkStream nsInput = tcpClient.GetStream();
-            nsInput.Read(bInput, 0, bInput.Length);
+            byte[] bInput = new byte[tcpClient.Available];
+            nsInput.Read(bInput, 0, tcpClient.Available);
             string data = Encoding.UTF8.GetString(bInput);
 #if DEBUG
-            Console.WriteLine($"<-- {data} from {tcpClient.Client.Handle}");
+            Console.WriteLine($"<-- '{data}' from {tcpClient.Client.Handle} Len: {tcpClient.Available} bytes");
 #endif
             if (new System.Text.RegularExpressions.Regex("^GET").IsMatch(data))
             {
                 string[] strDataW = data.Split(new char[] { ' ' });
                 string strFilePath = strDataW[1];
-                OnLogMessage(new LogMessageEventArgs($"\"{strDataW[0]} {strDataW[1]}\" from {tcpClient.Client.RemoteEndPoint.ToString()}"));
+                OnLogMessage(new LogMessageEventArgs($"\"{strDataW[0]} {strDataW[1]}\" from {tcpClient.Client.RemoteEndPoint}"));
+                byte[] bHeader;
 
-                try
+                if (strFilePath.Substring(Math.Max(0, strFilePath.Length - 4)) == ".php")
                 {
-                    if (strFilePath.Substring(Math.Max(0, strFilePath.Length - 4)) == ".php")
+                    Process procPHP = new Process();
+                    procPHP.StartInfo.UseShellExecute = false;
+                    procPHP.StartInfo.RedirectStandardOutput = true;
+                    procPHP.StartInfo.CreateNoWindow = true;
+                    procPHP.StartInfo.FileName = "C:\\Users\\Home\\Documents\\Apps\\php\\php-cgi.exe";
+                    procPHP.StartInfo.Arguments = path + strFilePath;
+                    procPHP.Start();
+                    string phpResult = procPHP.StandardOutput.ReadToEnd();
+                    string[] words = phpResult.Split(new string[] { "\r\n\r\n" }, StringSplitOptions.None);
+                    string headers = words.First();
+                    string content = string.Join("\r\n\r\n", words.Skip(1));
+                    procPHP.WaitForExit();
+                    bContent = Encoding.UTF8.GetBytes(content);
+                    bHeader = Encoding.UTF8.GetBytes($"HTTP/1.1 200 OK\r\n{headers}\r\nContent-Length: {bContent.Length}\r\n\r\n");
+                }
+                else
+                {
+                    try
                     {
-                        Process phpProc = new Process();
-                        phpProc.StartInfo.UseShellExecute = false;
-                        phpProc.StartInfo.RedirectStandardOutput = true;
-                        phpProc.StartInfo.FileName = "php\\php-cgi.exe";
-                        phpProc.StartInfo.Arguments = path + strFilePath;
-                        phpProc.Start();
-                        string phpResult = phpProc.StandardOutput.ReadToEnd();
-                        phpProc.WaitForExit();
-                        bContent = Encoding.UTF8.GetBytes(phpResult);
-                    }
-                    else
                         bContent = File.ReadAllBytes(path + strFilePath.Replace("/", @"\"));
-
-                }
-                catch (Exception ex)
-                {
-                    if (ex is FileNotFoundException || ex is DirectoryNotFoundException || ex is UnauthorizedAccessException)
-                    {
-                        bContent = Encoding.UTF8.GetBytes(ReadEmbeddedFile("404.html"));
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        bContent = Encoding.UTF8.GetBytes(ReadEmbeddedFile("error.html"));
-                        OnLogMessage(new LogMessageEventArgs($"Error: {ex}"));
-                        return;
+                        if (ex is FileNotFoundException || ex is DirectoryNotFoundException || ex is UnauthorizedAccessException)
+                            bContent = Encoding.UTF8.GetBytes(ReadEmbeddedFile("404.html"));
+                        else
+                        {
+                            bContent = Encoding.UTF8.GetBytes(ReadEmbeddedFile("error.html"));
+                            OnLogMessage(new LogMessageEventArgs($"Error: {ex}"));
+                            return;
+                        }
                     }
+                    bHeader = Encoding.UTF8.GetBytes($"HTTP/1.1 200 OK\r\nContent-Type: text/html; charset=UTF-8\r\nContent-Length: {bContent.Length}\r\n\r\n");
                 }
 
-                byte[] bHeader = Encoding.UTF8.GetBytes($"HTTP/1.1 200 OK\r\nContent-Type: text/html; charset=UTF-8\r\nContent-Length: {bContent.Length}\r\n\r\n");
                 byte[] bResult = JoinByteArray(bHeader, bContent);
                 nsInput.Write(bResult, 0, bResult.Length);
                 nsInput.Close();
