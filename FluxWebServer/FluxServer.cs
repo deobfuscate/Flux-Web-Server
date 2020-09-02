@@ -96,7 +96,7 @@ namespace FluxWebServer
                     procPHP.StartInfo.UseShellExecute = false;
                     procPHP.StartInfo.RedirectStandardOutput = true;
                     procPHP.StartInfo.CreateNoWindow = true;
-                    procPHP.StartInfo.FileName = "C:\\Users\\Home\\Documents\\Apps\\php\\php-cgi.exe";
+                    procPHP.StartInfo.FileName = "php\\php-cgi.exe";
                     procPHP.StartInfo.Arguments = path + strFilePath;
                     procPHP.Start();
                     string phpResult = procPHP.StandardOutput.ReadToEnd();
@@ -105,7 +105,10 @@ namespace FluxWebServer
                     string content = string.Join("\r\n\r\n", words.Skip(1));
                     procPHP.WaitForExit();
                     bContent = Encoding.UTF8.GetBytes(content);
-                    bHeader = Encoding.UTF8.GetBytes($"HTTP/1.1 200 OK\r\n{headers}\r\nContent-Length: {bContent.Length}\r\n\r\n");
+                    if (headers.Contains("Location: "))
+                        bHeader = Encoding.UTF8.GetBytes($"HTTP/1.1 302 FOUND\r\n{headers}\r\nContent-Length: {bContent.Length}\r\n\r\n");
+                    else
+                        bHeader = Encoding.UTF8.GetBytes($"HTTP/1.1 200 OK\r\n{headers}\r\nContent-Length: {bContent.Length}\r\n\r\n");
                 }
                 else
                 {
@@ -129,11 +132,11 @@ namespace FluxWebServer
                         contentType = mimeTypes[GetExt(strFilePath)];
                     else
                         contentType = "text/html";
-                    bHeader = Encoding.UTF8.GetBytes($"HTTP/1.1 200 OK\r\nLocation: http://www.example.com/\r\nContent-Type: {contentType}; charset=UTF-8\r\nContent-Length: {bContent.Length}\r\n\r\n");
+                    bHeader = Encoding.UTF8.GetBytes($"HTTP/1.1 200 OK\r\nContent-Type: {contentType}; charset=UTF-8\r\nContent-Length: {bContent.Length}\r\n\r\n");
                 }
 
-                byte[] bResult = JoinByteArray(bHeader, bContent);
-                nsInput.Write(bResult, 0, bResult.Length);
+                nsInput.Write(bHeader, 0, bHeader.Length);
+                nsInput.Write(bContent, 0, bContent.Length);
                 nsInput.Close();
             }
             tcpClient.Close();
@@ -149,14 +152,6 @@ namespace FluxWebServer
                 reader.Close();
             }
             return result;
-        }
-
-        private byte[] JoinByteArray(byte[] first, byte[] last)
-        {
-            byte[] bTmp = new byte[first.Length + last.Length];
-            Buffer.BlockCopy(first, 0, bTmp, 0, first.Length);
-            Buffer.BlockCopy(last, 0, bTmp, first.Length, last.Length);
-            return bTmp;
         }
 
         public static string GetExt(string url)
