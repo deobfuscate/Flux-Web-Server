@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Mime;
 using System.Net.Sockets;
 using System.Reflection;
 using System.Text;
@@ -16,6 +18,17 @@ namespace FluxWebServer
         private TcpListener tcpListener;
         private bool stoppingListener;
         public event EventHandler<LogMessageEventArgs> LogMessage;
+        Dictionary<string, string> mimeTypes = new Dictionary<string, string>(){
+            {".zip", "application/zip"},
+            {".jpg", "image/jpeg"},
+            {".png", "image/png"},
+            {".gif", "image/gif"},
+            {".mp4", "video/mp4"},
+            {".webm", "video/webm"},
+            {".flv", "video/x-flv"},
+            {".html", "text/html"},
+            {".htm", "text/html"}
+        };
 
         public FluxServer(int port, string path)
         {
@@ -57,7 +70,6 @@ namespace FluxWebServer
             if (stoppingListener)
             {
                 stoppingListener = false;
-                Console.WriteLine("WE STOPPIN");
                 return;
             }
             byte[] bContent;
@@ -112,7 +124,12 @@ namespace FluxWebServer
                             return;
                         }
                     }
-                    bHeader = Encoding.UTF8.GetBytes($"HTTP/1.1 200 OK\r\nContent-Type: text/html; charset=UTF-8\r\nContent-Length: {bContent.Length}\r\n\r\n");
+                    string contentType;
+                    if (mimeTypes.ContainsKey(GetExt(strFilePath)))
+                        contentType = mimeTypes[GetExt(strFilePath)];
+                    else
+                        contentType = "text/html";
+                    bHeader = Encoding.UTF8.GetBytes($"HTTP/1.1 200 OK\r\nLocation: http://www.example.com/\r\nContent-Type: {contentType}; charset=UTF-8\r\nContent-Length: {bContent.Length}\r\n\r\n");
                 }
 
                 byte[] bResult = JoinByteArray(bHeader, bContent);
@@ -141,7 +158,13 @@ namespace FluxWebServer
             Buffer.BlockCopy(last, 0, bTmp, first.Length, last.Length);
             return bTmp;
         }
-        
+
+        public static string GetExt(string url)
+        {
+            url = url.Split('?')[0].Split('/').Last();
+            return url.Contains('.') ? url.Substring(url.LastIndexOf('.')) : "";
+        }
+
         protected virtual void OnLogMessage(LogMessageEventArgs e)
         {
             LogMessage?.Invoke(this, e);
