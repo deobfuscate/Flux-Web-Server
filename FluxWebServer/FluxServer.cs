@@ -92,18 +92,10 @@ namespace FluxWebServer
 
                 if (strFilePath.Substring(Math.Max(0, strFilePath.Length - 4)) == ".php")
                 {
-                    Process procPHP = new Process();
-                    procPHP.StartInfo.UseShellExecute = false;
-                    procPHP.StartInfo.RedirectStandardOutput = true;
-                    procPHP.StartInfo.CreateNoWindow = true;
-                    procPHP.StartInfo.FileName = "php\\php-cgi.exe";
-                    procPHP.StartInfo.Arguments = path + strFilePath;
-                    procPHP.Start();
-                    string phpResult = procPHP.StandardOutput.ReadToEnd();
+                    string phpResult = ExecPHP(path + strFilePath);
                     string[] words = phpResult.Split(new string[] { "\r\n\r\n" }, StringSplitOptions.None);
                     string headers = words.First();
                     string content = string.Join("\r\n\r\n", words.Skip(1));
-                    procPHP.WaitForExit();
                     bContent = Encoding.UTF8.GetBytes(content);
                     if (headers.Contains("Location: "))
                         bHeader = Encoding.UTF8.GetBytes($"HTTP/1.1 302 FOUND\r\n{headers}\r\nContent-Length: {bContent.Length}\r\n\r\n");
@@ -158,6 +150,20 @@ namespace FluxWebServer
         {
             url = url.Split('?')[0].Split('/').Last();
             return url.Contains('.') ? url.Substring(url.LastIndexOf('.')) : "";
+        }
+
+        public static string ExecPHP(string file)
+        {
+            Process procPHP = new Process();
+            procPHP.StartInfo.UseShellExecute = false;
+            procPHP.StartInfo.RedirectStandardOutput = true;
+            procPHP.StartInfo.CreateNoWindow = true;
+            procPHP.StartInfo.FileName = "php\\php-cgi.exe";
+            procPHP.StartInfo.Arguments = file;
+            procPHP.Start();
+            string phpResult = procPHP.StandardOutput.ReadToEnd();
+            procPHP.WaitForExit();
+            return phpResult;
         }
 
         protected virtual void OnLogMessage(LogMessageEventArgs e)
