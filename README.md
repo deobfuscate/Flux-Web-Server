@@ -4,6 +4,7 @@ A simple web server made in C#
 ## Features
 * Publish a directory to be viewable on the WWW
 * Ability to change public directory on the fly
+* Basic PHP Support
 * Server status indicators including uptime
 
 ## Screenshot
