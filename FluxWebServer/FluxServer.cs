@@ -91,7 +91,7 @@ namespace FluxWebServer
 
                 if (strFilePath.Substring(Math.Max(0, strFilePath.Length - 4)) == ".php")
                 {
-                    string phpResult = ExecPHP(path + strFilePath);
+                    string phpResult = ExecPHP(path + strFilePath, strFilePath);
                     string[] words = phpResult.Split(new string[] { "\r\n\r\n" }, StringSplitOptions.None);
                     string headers = words.First();
                     string content = string.Join("\r\n\r\n", words.Skip(1));
@@ -151,10 +151,12 @@ namespace FluxWebServer
             return url.Contains('.') ? url.Substring(url.LastIndexOf('.')) : "";
         }
 
-        public static string ExecPHP(string file)
+        public static string ExecPHP(string file, string path)
         {
             Process procPHP = new Process();
             procPHP.StartInfo.UseShellExecute = false;
+            procPHP.StartInfo.EnvironmentVariables["REDIRECT_STATUS"] = "CGI";
+            procPHP.StartInfo.EnvironmentVariables["PHP_SELF"] = path;
             procPHP.StartInfo.RedirectStandardOutput = true;
             procPHP.StartInfo.CreateNoWindow = true;
             procPHP.StartInfo.FileName = "php\\php-cgi.exe";
