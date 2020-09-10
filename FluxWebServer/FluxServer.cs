@@ -156,7 +156,8 @@ namespace FluxWebServer
             Process procPHP = new Process();
             procPHP.StartInfo.UseShellExecute = false;
             procPHP.StartInfo.EnvironmentVariables["REDIRECT_STATUS"] = "CGI";
-            procPHP.StartInfo.EnvironmentVariables["PHP_SELF"] = path;
+            procPHP.StartInfo.EnvironmentVariables["REQUEST_METHOD"] = "GET";
+            procPHP.StartInfo.EnvironmentVariables["SCRIPT_NAME"] = path;
             procPHP.StartInfo.RedirectStandardOutput = true;
             procPHP.StartInfo.CreateNoWindow = true;
             procPHP.StartInfo.FileName = "php\\php-cgi.exe";
