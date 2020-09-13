@@ -110,7 +110,10 @@ namespace FluxWebServer
                     catch (Exception ex)
                     {
                         if (ex is FileNotFoundException || ex is DirectoryNotFoundException || ex is UnauthorizedAccessException)
+                        {
                             bContent = Encoding.UTF8.GetBytes(ReadEmbeddedFile("404.html"));
+                            OnLogMessage(new LogMessageEventArgs($"Error: 404 Cannot find {strFilePath}"));
+                        }
                         else
                         {
                             bContent = Encoding.UTF8.GetBytes(ReadEmbeddedFile("error.html"));
