@@ -82,7 +82,8 @@ namespace FluxWebServer
 #if DEBUG
             Console.WriteLine($"<-- '{data}' from {tcpClient.Client.Handle} Len: {tcpClient.Available} bytes");
 #endif
-            if (new System.Text.RegularExpressions.Regex("^GET").IsMatch(data))
+            List<string> modes = new List<string> { "GET", "POST", "PUT", "HEAD", "DELETE" };
+            if (StartsWithLst(modes, data))
             {
                 string[] strDataW = data.Split(new char[] { ' ' });
                 string strFilePath = strDataW[1];
@@ -168,6 +169,14 @@ namespace FluxWebServer
             string phpResult = procPHP.StandardOutput.ReadToEnd();
             procPHP.WaitForExit();
             return phpResult;
+        }
+
+        private bool StartsWithLst(List<string> list, string start)
+        {
+            foreach (string str in list)
+                if (start.StartsWith(str))
+                    return true;
+            return false;
         }
 
         protected virtual void OnLogMessage(LogMessageEventArgs e)
