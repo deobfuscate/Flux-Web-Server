@@ -92,7 +92,14 @@ namespace FluxWebServer
 
                 if (strFilePath.Substring(Math.Max(0, strFilePath.Length - 4)) == ".php")
                 {
-                    string phpResult = ExecPHP(path + strFilePath, strFilePath);
+                    string phpResult;
+                    if (strDataW[0] == "POST" || strDataW[0] == "PUT")
+                    {
+                        string payload = string.Join("\r\n\r\n", data.Split(new string[] { "\r\n\r\n" }, StringSplitOptions.None).Skip(1));
+                        phpResult = ExecPHP(path + strFilePath.Replace("/", @"\"), strFilePath, strDataW[0], payload);
+                    }
+                    else
+                        phpResult = ExecPHP(path + strFilePath.Replace("/", @"\"), strFilePath, strDataW[0]);
                     string[] words = phpResult.Split(new string[] { "\r\n\r\n" }, StringSplitOptions.None);
                     string headers = words.First();
                     string content = string.Join("\r\n\r\n", words.Skip(1));
@@ -155,16 +162,19 @@ namespace FluxWebServer
             return url.Contains('.') ? url.Substring(url.LastIndexOf('.')) : "";
         }
 
-        public static string ExecPHP(string file, string path)
+        public static string ExecPHP(string file, string path, string requestMethod, string payload = null)
         {
             Process procPHP = new Process();
             procPHP.StartInfo.UseShellExecute = false;
             procPHP.StartInfo.EnvironmentVariables["REDIRECT_STATUS"] = "CGI";
+            procPHP.StartInfo.EnvironmentVariables["REQUEST_METHOD"] = requestMethod;
             procPHP.StartInfo.EnvironmentVariables["SCRIPT_NAME"] = path;
+            procPHP.StartInfo.EnvironmentVariables["PATH_TRANSLATED"] = file;
             procPHP.StartInfo.RedirectStandardOutput = true;
             procPHP.StartInfo.CreateNoWindow = true;
             procPHP.StartInfo.FileName = "php\\php-cgi.exe";
-            procPHP.StartInfo.Arguments = file;
+            if ((requestMethod == "POST" || requestMethod == "PUT") && payload != null)
+                procPHP.StartInfo.Arguments = payload;
             procPHP.Start();
             string phpResult = procPHP.StandardOutput.ReadToEnd();
             procPHP.WaitForExit();
