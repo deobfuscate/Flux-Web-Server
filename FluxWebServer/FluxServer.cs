@@ -126,7 +126,6 @@ namespace FluxWebServer
                         {
                             bContent = Encoding.UTF8.GetBytes(ReadEmbeddedFile("error.html"));
                             OnLogMessage(new LogMessageEventArgs($"Error: {ex}"));
-                            return;
                         }
                     }
                     string contentType;
@@ -156,7 +155,7 @@ namespace FluxWebServer
             return result;
         }
 
-        public static string GetExt(string url)
+        private static string GetExt(string url)
         {
             url = url.Split('?')[0].Split('/').Last();
             return url.Contains('.') ? url.Substring(url.LastIndexOf('.')) : "";
@@ -183,8 +182,8 @@ namespace FluxWebServer
 
         private bool StartsWithLst(List<string> list, string start)
         {
-            foreach (string str in list)
-                if (start.StartsWith(str))
+            foreach (string token in list)
+                if (start.StartsWith(token))
                     return true;
             return false;
         }
