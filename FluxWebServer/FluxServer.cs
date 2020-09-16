@@ -47,7 +47,7 @@ namespace FluxWebServer
                 if (ex.ErrorCode == 10048)
                     OnLogMessage(new LogMessageEventArgs("Error: Address is already in use, ensure that the port is open."));
                 else
-                    OnLogMessage(new LogMessageEventArgs($"Error: {ex.ToString()}"));
+                    OnLogMessage(new LogMessageEventArgs($"Error: {ex}"));
                 return false;
             }
 
