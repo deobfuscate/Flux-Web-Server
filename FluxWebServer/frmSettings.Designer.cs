@@ -38,6 +38,9 @@
             this.dirDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.tabContainer = new System.Windows.Forms.TabControl();
             this.tabGeneral = new System.Windows.Forms.TabPage();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtPHPPath = new System.Windows.Forms.TextBox();
+            this.btnBroowsePHP = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numPort)).BeginInit();
             this.tabContainer.SuspendLayout();
             this.tabGeneral.SuspendLayout();
@@ -93,7 +96,7 @@
             // lblPort
             // 
             this.lblPort.AutoSize = true;
-            this.lblPort.Location = new System.Drawing.Point(48, 38);
+            this.lblPort.Location = new System.Drawing.Point(48, 66);
             this.lblPort.Name = "lblPort";
             this.lblPort.Size = new System.Drawing.Size(29, 13);
             this.lblPort.TabIndex = 10;
@@ -101,7 +104,7 @@
             // 
             // numPort
             // 
-            this.numPort.Location = new System.Drawing.Point(83, 36);
+            this.numPort.Location = new System.Drawing.Point(83, 64);
             this.numPort.Maximum = new decimal(new int[] {
             65535,
             0,
@@ -136,6 +139,9 @@
             // 
             // tabGeneral
             // 
+            this.tabGeneral.Controls.Add(this.label1);
+            this.tabGeneral.Controls.Add(this.txtPHPPath);
+            this.tabGeneral.Controls.Add(this.btnBroowsePHP);
             this.tabGeneral.Controls.Add(this.lblHttpDirText);
             this.tabGeneral.Controls.Add(this.txtHttpDir);
             this.tabGeneral.Controls.Add(this.btnBrowse);
@@ -148,6 +154,33 @@
             this.tabGeneral.TabIndex = 0;
             this.tabGeneral.Text = "General";
             this.tabGeneral.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 41);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(57, 13);
+            this.label1.TabIndex = 12;
+            this.label1.Text = "PHP Path:";
+            // 
+            // txtPHPPath
+            // 
+            this.txtPHPPath.Location = new System.Drawing.Point(83, 38);
+            this.txtPHPPath.Name = "txtPHPPath";
+            this.txtPHPPath.ReadOnly = true;
+            this.txtPHPPath.Size = new System.Drawing.Size(206, 20);
+            this.txtPHPPath.TabIndex = 13;
+            // 
+            // btnBroowsePHP
+            // 
+            this.btnBroowsePHP.Location = new System.Drawing.Point(295, 35);
+            this.btnBroowsePHP.Name = "btnBroowsePHP";
+            this.btnBroowsePHP.Size = new System.Drawing.Size(61, 25);
+            this.btnBroowsePHP.TabIndex = 14;
+            this.btnBroowsePHP.Text = "Browse...";
+            this.btnBroowsePHP.UseVisualStyleBackColor = true;
+            this.btnBroowsePHP.Click += new System.EventHandler(this.btnBroowsePHP_Click);
             // 
             // frmSettings
             // 
@@ -184,5 +217,8 @@
         private System.Windows.Forms.FolderBrowserDialog dirDialog;
         private System.Windows.Forms.TabControl tabContainer;
         private System.Windows.Forms.TabPage tabGeneral;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox txtPHPPath;
+        private System.Windows.Forms.Button btnBroowsePHP;
     }
 }
