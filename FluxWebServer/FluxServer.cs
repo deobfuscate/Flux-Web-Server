@@ -14,6 +14,7 @@ namespace FluxWebServer
     {
         private int port;
         private string path;
+        private string phpPath;
         private TcpListener tcpListener;
         private bool stoppingListener;
         public event EventHandler<LogMessageEventArgs> LogMessage;
@@ -29,10 +30,11 @@ namespace FluxWebServer
             {".htm", "text/html"}
         };
 
-        public FluxServer(int port, string path)
+        public FluxServer(int port, string path, string phpPath)
         {
             this.port = port;
             this.path = path;
+            this.phpPath = phpPath;
         }
 
         public bool Start()
@@ -96,10 +98,10 @@ namespace FluxWebServer
                     if (strDataW[0] == "POST" || strDataW[0] == "PUT")
                     {
                         string payload = string.Join("\r\n\r\n", data.Split(new string[] { "\r\n\r\n" }, StringSplitOptions.None).Skip(1));
-                        phpResult = ExecPHP(path + strFilePath.Replace("/", @"\"), strFilePath, strDataW[0], payload);
+                        phpResult = ExecPHP(path + strFilePath.Replace("/", @"\"), strFilePath, strDataW[0], phpPath, payload);
                     }
                     else
-                        phpResult = ExecPHP(path + strFilePath.Replace("/", @"\"), strFilePath, strDataW[0]);
+                        phpResult = ExecPHP(path + strFilePath.Replace("/", @"\"), strFilePath, strDataW[0], phpPath);
                     string[] words = phpResult.Split(new string[] { "\r\n\r\n" }, StringSplitOptions.None);
                     string headers = words.First();
                     string content = string.Join("\r\n\r\n", words.Skip(1));
@@ -161,7 +163,7 @@ namespace FluxWebServer
             return url.Contains('.') ? url.Substring(url.LastIndexOf('.')) : "";
         }
 
-        public static string ExecPHP(string file, string path, string requestMethod, string payload = null)
+        public static string ExecPHP(string file, string path, string requestMethod, string phpPath, string payload = null)
         {
             Process procPHP = new Process();
             procPHP.StartInfo.UseShellExecute = false;
@@ -171,7 +173,7 @@ namespace FluxWebServer
             procPHP.StartInfo.EnvironmentVariables["PATH_TRANSLATED"] = file;
             procPHP.StartInfo.RedirectStandardOutput = true;
             procPHP.StartInfo.CreateNoWindow = true;
-            procPHP.StartInfo.FileName = "php\\php-cgi.exe";
+            procPHP.StartInfo.FileName = phpPath;
             if ((requestMethod == "POST" || requestMethod == "PUT") && payload != null)
                 procPHP.StartInfo.Arguments = payload;
             procPHP.Start();

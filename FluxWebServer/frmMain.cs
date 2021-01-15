@@ -10,6 +10,7 @@ namespace FluxWebServer
         private bool isRunning;
         private string path;
         private int uptime;
+        private string phpPath;
         private int port = 0;
 
         public frmMain()
@@ -40,7 +41,7 @@ namespace FluxWebServer
                     Log("Error: Port is not set. Go to Tools -> Settings to set.");
                     return;
                 }
-                fluxServer = new FluxServer(port, path);
+                fluxServer = new FluxServer(port, path, phpPath);
                 fluxServer.LogMessage += c_LogMessage;
                 if (fluxServer.Start())
                 {
@@ -95,6 +96,7 @@ namespace FluxWebServer
         {
             path = Properties.Settings.Default.httpDir;
             port = Properties.Settings.Default.port;
+            phpPath = Properties.Settings.Default.phpPath;
         }
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
