@@ -165,6 +165,7 @@ namespace FluxWebServer
 
         public static string ExecPHP(string file, string path, string requestMethod, string phpPath, string payload = null)
         {
+            if (!File.Exists(phpPath)) return "";
             Process procPHP = new Process();
             procPHP.StartInfo.UseShellExecute = false;
             procPHP.StartInfo.EnvironmentVariables["REDIRECT_STATUS"] = "CGI";
