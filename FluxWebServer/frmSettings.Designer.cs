@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSettings));
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnBrowse = new System.Windows.Forms.Button();
@@ -48,7 +49,7 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(84, 193);
+            this.btnSave.Location = new System.Drawing.Point(84, 140);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(103, 29);
             this.btnSave.TabIndex = 0;
@@ -58,7 +59,7 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(195, 193);
+            this.btnCancel.Location = new System.Drawing.Point(195, 140);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(103, 29);
             this.btnCancel.TabIndex = 1;
@@ -134,7 +135,7 @@
             this.tabContainer.Location = new System.Drawing.Point(12, 12);
             this.tabContainer.Name = "tabContainer";
             this.tabContainer.SelectedIndex = 0;
-            this.tabContainer.Size = new System.Drawing.Size(368, 175);
+            this.tabContainer.Size = new System.Drawing.Size(368, 121);
             this.tabContainer.TabIndex = 12;
             // 
             // tabGeneral
@@ -150,7 +151,7 @@
             this.tabGeneral.Location = new System.Drawing.Point(4, 22);
             this.tabGeneral.Name = "tabGeneral";
             this.tabGeneral.Padding = new System.Windows.Forms.Padding(3);
-            this.tabGeneral.Size = new System.Drawing.Size(360, 149);
+            this.tabGeneral.Size = new System.Drawing.Size(360, 95);
             this.tabGeneral.TabIndex = 0;
             this.tabGeneral.Text = "General";
             this.tabGeneral.UseVisualStyleBackColor = true;
@@ -186,11 +187,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(392, 233);
+            this.ClientSize = new System.Drawing.Size(392, 178);
             this.Controls.Add(this.tabContainer);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "frmSettings";
             this.ShowInTaskbar = false;

@@ -32,8 +32,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>
-    </ApplicationIcon>
+    <ApplicationIcon>Simple Netwok HD.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -97,6 +96,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="resources\error.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Simple Netwok HD.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

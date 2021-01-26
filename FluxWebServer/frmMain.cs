@@ -11,7 +11,7 @@ namespace FluxWebServer
         private string path;
         private int uptime;
         private string phpPath;
-        private int port = 0;
+        private int port;
 
         public frmMain()
         {
@@ -20,6 +20,7 @@ namespace FluxWebServer
             isRunning = false;
             path = "";
             uptime = 0;
+            port = 0;
         }
 
         private void frmMain_Load(object sender, EventArgs e)
@@ -50,7 +51,7 @@ namespace FluxWebServer
                     lblStatus.Text = "Online";
                     tmrUptime.Start();
                     btnStart.Text = "Stop";
-                    Log("Web server started");
+                    Log("Web server started.");
                 }
             }
             else
@@ -63,7 +64,7 @@ namespace FluxWebServer
                 uptime = 0;
                 lblUptime.Text = "00:00:00";
                 btnStart.Text = "Start";
-                Log("Web server stopped");
+                Log("Web server stopped.");
             }
         }
 
