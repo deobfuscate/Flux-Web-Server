@@ -14,3 +14,4 @@ A simple web server made in C#
 
 ## Planned
 * Logging
+* Extended PHP support with POST processing
