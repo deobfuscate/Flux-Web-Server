@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using System.Drawing;
+using System.IO;
 
 namespace FluxWebServer
 {
@@ -40,6 +41,11 @@ namespace FluxWebServer
                 if (port == 0)
                 {
                     Log("Error: Port is not set. Go to Tools -> Settings to set.");
+                    return;
+                }
+                if (Directory.Exists(path))
+                {
+                    Log("Error: Server directory does not exist. Go to Tools -> Settings to set.");
                     return;
                 }
                 fluxServer = new FluxServer(port, path, phpPath);
