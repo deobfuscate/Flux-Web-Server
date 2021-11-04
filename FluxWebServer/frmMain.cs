@@ -43,7 +43,7 @@ namespace FluxWebServer
                     Log("Error: Port is not set. Go to Tools -> Settings to set.");
                     return;
                 }
-                if (Directory.Exists(path))
+                if (!Directory.Exists(path))
                 {
                     Log("Error: Server directory does not exist. Go to Tools -> Settings to set.");
                     return;
