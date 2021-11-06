@@ -42,6 +42,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.txtPHPPath = new System.Windows.Forms.TextBox();
             this.btnBroowsePHP = new System.Windows.Forms.Button();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
             ((System.ComponentModel.ISupportInitialize)(this.numPort)).BeginInit();
             this.tabContainer.SuspendLayout();
             this.tabGeneral.SuspendLayout();
@@ -132,6 +133,7 @@
             // tabContainer
             // 
             this.tabContainer.Controls.Add(this.tabGeneral);
+            this.tabContainer.Controls.Add(this.tabPage1);
             this.tabContainer.Location = new System.Drawing.Point(12, 12);
             this.tabContainer.Name = "tabContainer";
             this.tabContainer.SelectedIndex = 0;
@@ -183,6 +185,16 @@
             this.btnBroowsePHP.UseVisualStyleBackColor = true;
             this.btnBroowsePHP.Click += new System.EventHandler(this.btnBroowsePHP_Click);
             // 
+            // tabPage1
+            // 
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(360, 95);
+            this.tabPage1.TabIndex = 1;
+            this.tabPage1.Text = "Logging";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
             // frmSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -222,5 +234,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtPHPPath;
         private System.Windows.Forms.Button btnBroowsePHP;
+        private System.Windows.Forms.TabPage tabPage1;
     }
 }
