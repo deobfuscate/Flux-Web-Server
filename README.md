@@ -6,7 +6,7 @@ A simple web server made in C#
 * Ability to change public directory on the fly
 * Basic PHP Support
 * Server status indicators including uptime
-* Advanced settings dialog with options for directory, port, etc
+* Advanced settings window with options for directory, port, etc
 
 ## Screenshot
 ![Flux Web Server](screenshot.jpg?raw=true "Flux Web Server")
