@@ -15,19 +15,6 @@ namespace FluxWebServer
         private string phpPath;
         private int port;
 
-        [DllImport("dwmapi.dll")]
-        private static extern int DwmSetWindowAttribute(IntPtr hwnd, int attr, int[] attrValue, int attrSize);
-
-        protected override void OnHandleCreated(EventArgs e)
-        {
-            try
-            {
-                if (DwmSetWindowAttribute(Handle, 19, new[] { 1 }, 4) != 0)
-                DwmSetWindowAttribute(Handle, 20, new[] { 1 }, 4);
-            }
-            catch { return; }
-        }
-
         public frmMain()
         {
             InitializeComponent();
