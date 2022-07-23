@@ -10,10 +10,8 @@ namespace FluxWebServer
     {
         private FluxServer fluxServer;
         private bool isRunning;
-        private string path;
-        private int uptime;
-        private string phpPath;
-        private int port;
+        private string path, phpPath;
+        private int uptime, port;
 
         public frmMain()
         {
@@ -50,7 +48,7 @@ namespace FluxWebServer
                     return;
                 }
                 fluxServer = new FluxServer(port, path, phpPath);
-                fluxServer.LogMessage += c_LogMessage;
+                fluxServer.LogMessage += Log;
                 if (fluxServer.Start())
                 {
                     isRunning = true;
@@ -111,8 +109,7 @@ namespace FluxWebServer
             Application.Exit();
         }
 
-
-        void c_LogMessage(object sender, LogMessageEventArgs e)
+        void Log(object sender, LogMessageEventArgs e)
         {
             Log(e.Message);
         }
