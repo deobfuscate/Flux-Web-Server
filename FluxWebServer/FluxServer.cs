@@ -13,8 +13,7 @@ namespace FluxWebServer
     class FluxServer
     {
         private int port;
-        private string path;
-        private string phpPath;
+        private string path, phpPath;
         private TcpListener tcpListener;
         private bool stoppingListener;
         public event EventHandler<LogMessageEventArgs> LogMessage;
