@@ -19,8 +19,7 @@ namespace FluxWebServer
             CheckForIllegalCrossThreadCalls = false;
             isRunning = false;
             path = "";
-            uptime = 0;
-            port = 0;
+            uptime = port = 0;
         }
 
         private void frmMain_Load(object sender, EventArgs e)
