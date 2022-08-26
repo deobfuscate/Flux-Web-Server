@@ -13,8 +13,7 @@ namespace FluxWebServer
         private string path, phpPath;
         private int uptime, port;
 
-        public frmMain()
-        {
+        public frmMain() {
             InitializeComponent();
             CheckForIllegalCrossThreadCalls = false;
             isRunning = false;
@@ -22,34 +21,27 @@ namespace FluxWebServer
             uptime = port = 0;
         }
 
-        private void frmMain_Load(object sender, EventArgs e)
-        {
+        private void frmMain_Load(object sender, EventArgs e) {
             updateSettings();
         }
 
-        private void btnStart_Click(object sender, EventArgs e)
-        {
-            if (!isRunning)
-            {
-                if (path.Equals(""))
-                {
+        private void btnStart_Click(object sender, EventArgs e) {
+            if (!isRunning) {
+                if (path.Equals("")) {
                     Log("Error: Public Directory is not set. Go to Tools -> Settings to set.");
                     return;
                 }
-                if (port == 0)
-                {
+                if (port == 0) {
                     Log("Error: Port is not set. Go to Tools -> Settings to set.");
                     return;
                 }
-                if (!Directory.Exists(path))
-                {
+                if (!Directory.Exists(path)) {
                     Log("Error: Server directory does not exist. Go to Tools -> Settings to set.");
                     return;
                 }
                 fluxServer = new FluxServer(port, path, phpPath);
                 fluxServer.LogMessage += Log;
-                if (fluxServer.Start())
-                {
+                if (fluxServer.Start()) {
                     isRunning = true;
                     lblStatus.ForeColor = Color.Green;
                     lblStatus.Text = "Online";
@@ -58,8 +50,7 @@ namespace FluxWebServer
                     Log("Web server started.");
                 }
             }
-            else
-            {
+            else {
                 fluxServer.Stop();
                 isRunning = false;
                 lblStatus.ForeColor = Color.Red;
@@ -72,22 +63,18 @@ namespace FluxWebServer
             }
         }
 
-        private void tmrUptime_Tick(object sender, EventArgs e)
-        {
+        private void tmrUptime_Tick(object sender, EventArgs e) {
             uptime++;
             TimeSpan tsTime = TimeSpan.FromSeconds(uptime);
             lblUptime.Text = tsTime.ToString(@"hh\:mm\:ss");
         }
 
-        public void Log(string text)
-        {
+        public void Log(string text) {
             txtLog.AppendText($"[{DateTime.Now}] {text}{Environment.NewLine}");
         }
 
-        private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (isRunning)
-            {
+        private void settingsToolStripMenuItem_Click(object sender, EventArgs e) {
+            if (isRunning) {
                 MessageBox.Show("Cannot change settings while server is running.", "Error");
                 return;
             }
@@ -97,19 +84,16 @@ namespace FluxWebServer
             if (form.DialogResult == DialogResult.OK)
                 updateSettings();
         }
-        private void updateSettings()
-        {
+        private void updateSettings() {
             path = Properties.Settings.Default.httpDir;
             port = Properties.Settings.Default.port;
             phpPath = Properties.Settings.Default.phpPath;
         }
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
-        {
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e) {
             Application.Exit();
         }
 
-        void Log(object sender, LogMessageEventArgs e)
-        {
+        void Log(object sender, LogMessageEventArgs e) {
             Log(e.Message);
         }
     }

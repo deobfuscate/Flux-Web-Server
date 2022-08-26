@@ -29,22 +29,18 @@ namespace FluxWebServer
             {".htm", "text/html"}
         };
 
-        public FluxServer(int port, string path, string phpPath)
-        {
+        public FluxServer(int port, string path, string phpPath) {
             this.port = port;
             this.path = path;
             this.phpPath = phpPath;
         }
 
-        public bool Start()
-        {
-            try
-            {
+        public bool Start() {
+            try {
                 tcpListener = new TcpListener(IPAddress.Any, port);
                 tcpListener.Start();
             }
-            catch (SocketException ex)
-            {
+            catch (SocketException ex) {
                 if (ex.ErrorCode == 10048)
                     OnLogMessage(new LogMessageEventArgs("Error: Address is already in use, ensure that the port is open."));
                 else
@@ -56,24 +52,21 @@ namespace FluxWebServer
             return true;
         }
 
-        public void Stop()
-        {
+        public void Stop() {
             stoppingListener = true;
             tcpListener.Stop();
         }
 
-        private void ManageClient(IAsyncResult iarStatus)
-        {
+        private void ManageClient(IAsyncResult iarStatus) {
 #if DEBUG
             Console.WriteLine("=== Incoming connection");
 #endif
-            if (stoppingListener)
-            {
+            if (stoppingListener) {
                 stoppingListener = false;
                 return;
             }
             byte[] bContent;
-            tcpListener = (TcpListener) iarStatus.AsyncState;
+            tcpListener = (TcpListener)iarStatus.AsyncState;
             var tcpClient = tcpListener.EndAcceptTcpClient(iarStatus);
             tcpListener.BeginAcceptTcpClient(ManageClient, tcpListener);
             NetworkStream nsInput = tcpClient.GetStream();
@@ -84,18 +77,15 @@ namespace FluxWebServer
             Console.WriteLine($"<-- '{data}' from {tcpClient.Client.Handle} Len: {tcpClient.Available} bytes");
 #endif
             List<string> modes = new List<string> { "GET", "POST", "PUT", "HEAD", "DELETE" };
-            if (StartsWithLst(modes, data))
-            {
+            if (StartsWithLst(modes, data)) {
                 string[] strDataW = data.Split(new char[] { ' ' });
                 string strFilePath = strDataW[1];
                 OnLogMessage(new LogMessageEventArgs($"\"{strDataW[0]} {strDataW[1]}\" from {tcpClient.Client.RemoteEndPoint}"));
                 byte[] bHeader;
 
-                if (strFilePath.Substring(Math.Max(0, strFilePath.Length - 4)) == ".php")
-                {
+                if (strFilePath.Substring(Math.Max(0, strFilePath.Length - 4)) == ".php") {
                     string phpResult;
-                    if (strDataW[0] == "POST" || strDataW[0] == "PUT")
-                    {
+                    if (strDataW[0] == "POST" || strDataW[0] == "PUT") {
                         string payload = string.Join("\r\n\r\n", data.Split(new string[] { "\r\n\r\n" }, StringSplitOptions.None).Skip(1));
                         phpResult = ExecPHP(path + strFilePath.Replace("/", @"\"), strFilePath, strDataW[0], phpPath, payload);
                     }
@@ -110,21 +100,16 @@ namespace FluxWebServer
                     else
                         bHeader = Encoding.UTF8.GetBytes($"HTTP/1.1 200 OK\r\n{headers}\r\nContent-Length: {bContent.Length}\r\n\r\n");
                 }
-                else
-                {
-                    try
-                    {
+                else {
+                    try {
                         bContent = File.ReadAllBytes(path + strFilePath.Replace("/", @"\"));
                     }
-                    catch (Exception ex)
-                    {
-                        if (ex is FileNotFoundException || ex is DirectoryNotFoundException || ex is UnauthorizedAccessException)
-                        {
+                    catch (Exception ex) {
+                        if (ex is FileNotFoundException || ex is DirectoryNotFoundException || ex is UnauthorizedAccessException) {
                             bContent = Encoding.UTF8.GetBytes(ReadEmbeddedFile("404.html"));
                             OnLogMessage(new LogMessageEventArgs($"Error: 404 Cannot find {strFilePath}"));
                         }
-                        else
-                        {
+                        else {
                             bContent = Encoding.UTF8.GetBytes(ReadEmbeddedFile("error.html"));
                             OnLogMessage(new LogMessageEventArgs($"Error: {ex}"));
                         }
@@ -144,26 +129,22 @@ namespace FluxWebServer
             tcpClient.Close();
         }
 
-        private string ReadEmbeddedFile(string file)
-        {
+        private string ReadEmbeddedFile(string file) {
             string result;
             using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream($"FluxWebServer.resources.{file}"))
-            using (StreamReader reader = new StreamReader(stream))
-            {
+            using (StreamReader reader = new StreamReader(stream)) {
                 result = reader.ReadToEnd();
                 reader.Close();
             }
             return result;
         }
 
-        private static string GetExt(string url)
-        {
+        private static string GetExt(string url) {
             url = url.Split('?')[0].Split('/').Last();
             return url.Contains('.') ? url.Substring(url.LastIndexOf('.')) : "";
         }
 
-        public static string ExecPHP(string file, string path, string requestMethod, string phpPath, string payload = null)
-        {
+        public static string ExecPHP(string file, string path, string requestMethod, string phpPath, string payload = null) {
             if (!File.Exists(phpPath)) return "";
             Process procPHP = new Process();
             procPHP.StartInfo.UseShellExecute = false;
@@ -182,16 +163,14 @@ namespace FluxWebServer
             return phpResult;
         }
 
-        private bool StartsWithLst(List<string> list, string start)
-        {
+        private bool StartsWithLst(List<string> list, string start) {
             foreach (string token in list)
                 if (start.StartsWith(token))
                     return true;
             return false;
         }
 
-        protected virtual void OnLogMessage(LogMessageEventArgs e)
-        {
+        protected virtual void OnLogMessage(LogMessageEventArgs e) {
             LogMessage?.Invoke(this, e);
         }
     }
@@ -200,8 +179,7 @@ namespace FluxWebServer
     {
         public string Message;
 
-        public LogMessageEventArgs(string message)
-        {
+        public LogMessageEventArgs(string message) {
             Message = message;
         }
     }
