@@ -35,6 +35,9 @@ namespace FluxWebServer
             this.phpPath = phpPath;
         }
 
+        /*
+         * Starts the TCP Listener and checks for exceptions
+         */
         public bool Start() {
             try {
                 tcpListener = new TcpListener(IPAddress.Any, port);
@@ -52,6 +55,9 @@ namespace FluxWebServer
             return true;
         }
 
+        /*
+         * Stops the TCP Listener
+         */
         public void Stop() {
             stoppingListener = true;
             tcpListener.Stop();
