@@ -4,10 +4,8 @@ using System.Drawing;
 using System.IO;
 using System.Runtime.InteropServices;
 
-namespace FluxWebServer
-{
-    public partial class frmMain : Form
-    {
+namespace FluxWebServer {
+    public partial class frmMain : Form {
         private FluxServer fluxServer;
         private bool isRunning;
         private string path, phpPath;
