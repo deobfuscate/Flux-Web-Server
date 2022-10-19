@@ -2,10 +2,8 @@
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
-namespace FluxWebServer
-{
-    public partial class frmSettings : Form
-    {
+namespace FluxWebServer {
+    public partial class frmSettings : Form {
         private string httpDir;
         private string phpPath;
         private int port = 0;
