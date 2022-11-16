@@ -16,16 +16,20 @@ namespace FluxWebServer {
             phpPath = Properties.Settings.Default.phpPath;
             port = Properties.Settings.Default.port;
 
-            if (httpDir != null)
+            if (httpDir != null) {
                 txtHttpDir.Text = httpDir;
-            if (phpPath != null)
+            }
+            if (phpPath != null) {
                 txtPHPPath.Text = phpPath;
-            if (port != 0)
-                numPort.Value = Properties.Settings.Default.port;
-            else
-                numPort.Value = 80;
-        }
+            }
 
+            if (port != 0) {
+                numPort.Value = Properties.Settings.Default.port;
+            }
+            else {
+                numPort.Value = 80;
+            }
+        }
         private void btnBrowse_Click(object sender, EventArgs e) {
             DialogResult dlgResult = dirDialog.ShowDialog();
             if (dlgResult == DialogResult.OK) {
