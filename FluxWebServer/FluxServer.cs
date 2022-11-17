@@ -64,9 +64,9 @@ namespace FluxWebServer
         }
 
         private void ManageClient(IAsyncResult iarStatus) {
-#if DEBUG
-            Console.WriteLine("=== Incoming connection");
-#endif
+            #if DEBUG
+                Console.WriteLine("=== Incoming connection");
+            #endif
             if (stoppingListener) {
                 stoppingListener = false;
                 return;
@@ -79,9 +79,9 @@ namespace FluxWebServer
             byte[] bInput = new byte[tcpClient.Available];
             nsInput.Read(bInput, 0, tcpClient.Available);
             string data = Encoding.UTF8.GetString(bInput);
-#if DEBUG
-            Console.WriteLine($"<-- '{data}' from {tcpClient.Client.Handle} Len: {tcpClient.Available} bytes");
-#endif
+            #if DEBUG
+                Console.WriteLine($"<-- '{data}' from {tcpClient.Client.Handle} Len: {tcpClient.Available} bytes");
+            #endif
             List<string> modes = new List<string> { "GET", "POST", "PUT", "HEAD", "DELETE" };
             if (StartsWithLst(modes, data)) {
                 string[] strDataW = data.Split(new char[] { ' ' });
@@ -161,8 +161,9 @@ namespace FluxWebServer
             procPHP.StartInfo.RedirectStandardOutput = true;
             procPHP.StartInfo.CreateNoWindow = true;
             procPHP.StartInfo.FileName = phpPath;
-            if ((requestMethod == "POST" || requestMethod == "PUT") && payload != null)
+            if ((requestMethod == "POST" || requestMethod == "PUT") && payload != null) {
                 procPHP.StartInfo.Arguments = payload;
+            }
             procPHP.Start();
             string phpResult = procPHP.StandardOutput.ReadToEnd();
             procPHP.WaitForExit();
