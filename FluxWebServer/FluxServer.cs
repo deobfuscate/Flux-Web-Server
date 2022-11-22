@@ -171,9 +171,11 @@ namespace FluxWebServer
         }
 
         private bool StartsWithLst(List<string> list, string start) {
-            foreach (string token in list)
-                if (start.StartsWith(token))
+            foreach (string token in list) {
+                if (start.StartsWith(token)) {
                     return true;
+                }
+            }
             return false;
         }
 
