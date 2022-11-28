@@ -8,16 +8,14 @@ using System.Net.Sockets;
 using System.Reflection;
 using System.Text;
 
-namespace FluxWebServer
-{
-    class FluxServer
-    {
+namespace FluxWebServer {
+    class FluxServer {
         private int port;
         private string path, phpPath;
         private TcpListener tcpListener;
         private bool stoppingListener;
         public event EventHandler<LogMessageEventArgs> LogMessage;
-        Dictionary<string, string> mimeTypes = new Dictionary<string, string>(){
+        Dictionary<string, string> mimeTypes = new Dictionary<string, string>() {
             {".zip", "application/zip"},
             {".jpg", "image/jpeg"},
             {".png", "image/png"},
