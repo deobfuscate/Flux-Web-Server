@@ -182,8 +182,7 @@ namespace FluxWebServer {
         }
     }
 
-    public class LogMessageEventArgs : EventArgs
-    {
+    public class LogMessageEventArgs : EventArgs {
         public string Message;
 
         public LogMessageEventArgs(string message) {
