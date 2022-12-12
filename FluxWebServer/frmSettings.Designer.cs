@@ -41,12 +41,12 @@
             this.tabGeneral = new System.Windows.Forms.TabPage();
             this.label1 = new System.Windows.Forms.Label();
             this.txtPHPPath = new System.Windows.Forms.TextBox();
-            this.btnBroowsePHP = new System.Windows.Forms.Button();
+            this.btnBrowsePHP = new System.Windows.Forms.Button();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.button1 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.numPort)).BeginInit();
             this.tabContainer.SuspendLayout();
             this.tabGeneral.SuspendLayout();
@@ -149,7 +149,7 @@
             // 
             this.tabGeneral.Controls.Add(this.label1);
             this.tabGeneral.Controls.Add(this.txtPHPPath);
-            this.tabGeneral.Controls.Add(this.btnBroowsePHP);
+            this.tabGeneral.Controls.Add(this.btnBrowsePHP);
             this.tabGeneral.Controls.Add(this.lblHttpDirText);
             this.tabGeneral.Controls.Add(this.txtHttpDir);
             this.tabGeneral.Controls.Add(this.btnBrowse);
@@ -180,15 +180,15 @@
             this.txtPHPPath.Size = new System.Drawing.Size(206, 20);
             this.txtPHPPath.TabIndex = 13;
             // 
-            // btnBroowsePHP
+            // btnBrowsePHP
             // 
-            this.btnBroowsePHP.Location = new System.Drawing.Point(295, 35);
-            this.btnBroowsePHP.Name = "btnBroowsePHP";
-            this.btnBroowsePHP.Size = new System.Drawing.Size(61, 25);
-            this.btnBroowsePHP.TabIndex = 14;
-            this.btnBroowsePHP.Text = "Browse...";
-            this.btnBroowsePHP.UseVisualStyleBackColor = true;
-            this.btnBroowsePHP.Click += new System.EventHandler(this.btnBroowsePHP_Click);
+            this.btnBrowsePHP.Location = new System.Drawing.Point(295, 35);
+            this.btnBrowsePHP.Name = "btnBrowsePHP";
+            this.btnBrowsePHP.Size = new System.Drawing.Size(61, 25);
+            this.btnBrowsePHP.TabIndex = 14;
+            this.btnBrowsePHP.Text = "Browse...";
+            this.btnBrowsePHP.UseVisualStyleBackColor = true;
+            this.btnBrowsePHP.Click += new System.EventHandler(this.btnBroowsePHP_Click);
             // 
             // tabPage1
             // 
@@ -203,6 +203,16 @@
             this.tabPage1.TabIndex = 1;
             this.tabPage1.Text = "Logging";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(6, 6);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(100, 17);
+            this.checkBox1.TabIndex = 11;
+            this.checkBox1.Text = "Enable Logging";
+            this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // button1
             // 
@@ -228,16 +238,6 @@
             this.label2.Size = new System.Drawing.Size(73, 13);
             this.label2.TabIndex = 0;
             this.label2.Text = "Log Directory:";
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(6, 6);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(100, 17);
-            this.checkBox1.TabIndex = 11;
-            this.checkBox1.Text = "Enable Logging";
-            this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // frmSettings
             // 
@@ -279,7 +279,7 @@
         private System.Windows.Forms.TabPage tabGeneral;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtPHPPath;
-        private System.Windows.Forms.Button btnBroowsePHP;
+        private System.Windows.Forms.Button btnBrowsePHP;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox textBox1;
