@@ -43,8 +43,8 @@
             this.txtPHPPath = new System.Windows.Forms.TextBox();
             this.btnBrowsePHP = new System.Windows.Forms.Button();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.chkEnableLogs = new System.Windows.Forms.CheckBox();
+            this.btnLogDir = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numPort)).BeginInit();
@@ -192,8 +192,8 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.checkBox1);
-            this.tabPage1.Controls.Add(this.button1);
+            this.tabPage1.Controls.Add(this.chkEnableLogs);
+            this.tabPage1.Controls.Add(this.btnLogDir);
             this.tabPage1.Controls.Add(this.textBox1);
             this.tabPage1.Controls.Add(this.label2);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
@@ -204,24 +204,24 @@
             this.tabPage1.Text = "Logging";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // checkBox1
+            // chkEnableLogs
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(6, 6);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(100, 17);
-            this.checkBox1.TabIndex = 11;
-            this.checkBox1.Text = "Enable Logging";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.chkEnableLogs.AutoSize = true;
+            this.chkEnableLogs.Location = new System.Drawing.Point(6, 6);
+            this.chkEnableLogs.Name = "chkEnableLogs";
+            this.chkEnableLogs.Size = new System.Drawing.Size(100, 17);
+            this.chkEnableLogs.TabIndex = 11;
+            this.chkEnableLogs.Text = "Enable Logging";
+            this.chkEnableLogs.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // btnLogDir
             // 
-            this.button1.Location = new System.Drawing.Point(293, 24);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(61, 25);
-            this.button1.TabIndex = 10;
-            this.button1.Text = "Browse...";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnLogDir.Location = new System.Drawing.Point(293, 24);
+            this.btnLogDir.Name = "btnLogDir";
+            this.btnLogDir.Size = new System.Drawing.Size(61, 25);
+            this.btnLogDir.TabIndex = 10;
+            this.btnLogDir.Text = "Browse...";
+            this.btnLogDir.UseVisualStyleBackColor = true;
             // 
             // textBox1
             // 
@@ -281,9 +281,9 @@
         private System.Windows.Forms.TextBox txtPHPPath;
         private System.Windows.Forms.Button btnBrowsePHP;
         private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnLogDir;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox chkEnableLogs;
     }
 }
