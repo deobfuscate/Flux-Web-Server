@@ -31,7 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSettings));
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.btnBrowse = new System.Windows.Forms.Button();
+            this.btnBrowsePubFldr = new System.Windows.Forms.Button();
             this.txtHttpDir = new System.Windows.Forms.TextBox();
             this.lblHttpDirText = new System.Windows.Forms.Label();
             this.lblPort = new System.Windows.Forms.Label();
@@ -39,14 +39,14 @@
             this.dirDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.tabContainer = new System.Windows.Forms.TabControl();
             this.tabGeneral = new System.Windows.Forms.TabPage();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblPHPPath = new System.Windows.Forms.Label();
             this.txtPHPPath = new System.Windows.Forms.TextBox();
             this.btnBrowsePHP = new System.Windows.Forms.Button();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.chkEnableLogs = new System.Windows.Forms.CheckBox();
             this.btnLogDir = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lblLogDir = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numPort)).BeginInit();
             this.tabContainer.SuspendLayout();
             this.tabGeneral.SuspendLayout();
@@ -73,15 +73,15 @@
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // btnBrowse
+            // btnBrowsePubFldr
             // 
-            this.btnBrowse.Location = new System.Drawing.Point(295, 7);
-            this.btnBrowse.Name = "btnBrowse";
-            this.btnBrowse.Size = new System.Drawing.Size(61, 25);
-            this.btnBrowse.TabIndex = 9;
-            this.btnBrowse.Text = "Browse...";
-            this.btnBrowse.UseVisualStyleBackColor = true;
-            this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
+            this.btnBrowsePubFldr.Location = new System.Drawing.Point(295, 7);
+            this.btnBrowsePubFldr.Name = "btnBrowsePubFldr";
+            this.btnBrowsePubFldr.Size = new System.Drawing.Size(61, 25);
+            this.btnBrowsePubFldr.TabIndex = 9;
+            this.btnBrowsePubFldr.Text = "Browse...";
+            this.btnBrowsePubFldr.UseVisualStyleBackColor = true;
+            this.btnBrowsePubFldr.Click += new System.EventHandler(this.btnBrowse_Click);
             // 
             // txtHttpDir
             // 
@@ -103,7 +103,7 @@
             // lblPort
             // 
             this.lblPort.AutoSize = true;
-            this.lblPort.Location = new System.Drawing.Point(48, 66);
+            this.lblPort.Location = new System.Drawing.Point(34, 66);
             this.lblPort.Name = "lblPort";
             this.lblPort.Size = new System.Drawing.Size(29, 13);
             this.lblPort.TabIndex = 10;
@@ -147,12 +147,12 @@
             // 
             // tabGeneral
             // 
-            this.tabGeneral.Controls.Add(this.label1);
+            this.tabGeneral.Controls.Add(this.lblPHPPath);
             this.tabGeneral.Controls.Add(this.txtPHPPath);
             this.tabGeneral.Controls.Add(this.btnBrowsePHP);
             this.tabGeneral.Controls.Add(this.lblHttpDirText);
             this.tabGeneral.Controls.Add(this.txtHttpDir);
-            this.tabGeneral.Controls.Add(this.btnBrowse);
+            this.tabGeneral.Controls.Add(this.btnBrowsePubFldr);
             this.tabGeneral.Controls.Add(this.numPort);
             this.tabGeneral.Controls.Add(this.lblPort);
             this.tabGeneral.Location = new System.Drawing.Point(4, 22);
@@ -163,14 +163,14 @@
             this.tabGeneral.Text = "General";
             this.tabGeneral.UseVisualStyleBackColor = true;
             // 
-            // label1
+            // lblPHPPath
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 41);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(57, 13);
-            this.label1.TabIndex = 12;
-            this.label1.Text = "PHP Path:";
+            this.lblPHPPath.AutoSize = true;
+            this.lblPHPPath.Location = new System.Drawing.Point(6, 41);
+            this.lblPHPPath.Name = "lblPHPPath";
+            this.lblPHPPath.Size = new System.Drawing.Size(57, 13);
+            this.lblPHPPath.TabIndex = 12;
+            this.lblPHPPath.Text = "PHP Path:";
             // 
             // txtPHPPath
             // 
@@ -195,7 +195,7 @@
             this.tabPage1.Controls.Add(this.chkEnableLogs);
             this.tabPage1.Controls.Add(this.btnLogDir);
             this.tabPage1.Controls.Add(this.textBox1);
-            this.tabPage1.Controls.Add(this.label2);
+            this.tabPage1.Controls.Add(this.lblLogDir);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -230,14 +230,14 @@
             this.textBox1.Size = new System.Drawing.Size(202, 20);
             this.textBox1.TabIndex = 1;
             // 
-            // label2
+            // lblLogDir
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 30);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(73, 13);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Log Directory:";
+            this.lblLogDir.AutoSize = true;
+            this.lblLogDir.Location = new System.Drawing.Point(6, 30);
+            this.lblLogDir.Name = "lblLogDir";
+            this.lblLogDir.Size = new System.Drawing.Size(73, 13);
+            this.lblLogDir.TabIndex = 0;
+            this.lblLogDir.Text = "Log Directory:";
             // 
             // frmSettings
             // 
@@ -269,7 +269,7 @@
 
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.Button btnBrowse;
+        private System.Windows.Forms.Button btnBrowsePubFldr;
         private System.Windows.Forms.TextBox txtHttpDir;
         private System.Windows.Forms.Label lblHttpDirText;
         private System.Windows.Forms.Label lblPort;
@@ -277,13 +277,13 @@
         private System.Windows.Forms.FolderBrowserDialog dirDialog;
         private System.Windows.Forms.TabControl tabContainer;
         private System.Windows.Forms.TabPage tabGeneral;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblPHPPath;
         private System.Windows.Forms.TextBox txtPHPPath;
         private System.Windows.Forms.Button btnBrowsePHP;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.Button btnLogDir;
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblLogDir;
         private System.Windows.Forms.CheckBox chkEnableLogs;
     }
 }
