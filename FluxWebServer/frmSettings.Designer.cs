@@ -42,15 +42,15 @@
             this.lblPHPPath = new System.Windows.Forms.Label();
             this.txtPHPPath = new System.Windows.Forms.TextBox();
             this.btnBrowsePHP = new System.Windows.Forms.Button();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabLogging = new System.Windows.Forms.TabPage();
             this.chkEnableLogs = new System.Windows.Forms.CheckBox();
             this.btnLogDir = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtLogDir = new System.Windows.Forms.TextBox();
             this.lblLogDir = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numPort)).BeginInit();
             this.tabContainer.SuspendLayout();
             this.tabGeneral.SuspendLayout();
-            this.tabPage1.SuspendLayout();
+            this.tabLogging.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnSave
@@ -138,7 +138,7 @@
             // tabContainer
             // 
             this.tabContainer.Controls.Add(this.tabGeneral);
-            this.tabContainer.Controls.Add(this.tabPage1);
+            this.tabContainer.Controls.Add(this.tabLogging);
             this.tabContainer.Location = new System.Drawing.Point(12, 12);
             this.tabContainer.Name = "tabContainer";
             this.tabContainer.SelectedIndex = 0;
@@ -190,19 +190,19 @@
             this.btnBrowsePHP.UseVisualStyleBackColor = true;
             this.btnBrowsePHP.Click += new System.EventHandler(this.btnBroowsePHP_Click);
             // 
-            // tabPage1
+            // tabLogging
             // 
-            this.tabPage1.Controls.Add(this.chkEnableLogs);
-            this.tabPage1.Controls.Add(this.btnLogDir);
-            this.tabPage1.Controls.Add(this.textBox1);
-            this.tabPage1.Controls.Add(this.lblLogDir);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(360, 95);
-            this.tabPage1.TabIndex = 1;
-            this.tabPage1.Text = "Logging";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.tabLogging.Controls.Add(this.chkEnableLogs);
+            this.tabLogging.Controls.Add(this.btnLogDir);
+            this.tabLogging.Controls.Add(this.txtLogDir);
+            this.tabLogging.Controls.Add(this.lblLogDir);
+            this.tabLogging.Location = new System.Drawing.Point(4, 22);
+            this.tabLogging.Name = "tabLogging";
+            this.tabLogging.Padding = new System.Windows.Forms.Padding(3);
+            this.tabLogging.Size = new System.Drawing.Size(360, 95);
+            this.tabLogging.TabIndex = 1;
+            this.tabLogging.Text = "Logging";
+            this.tabLogging.UseVisualStyleBackColor = true;
             // 
             // chkEnableLogs
             // 
@@ -223,12 +223,12 @@
             this.btnLogDir.Text = "Browse...";
             this.btnLogDir.UseVisualStyleBackColor = true;
             // 
-            // textBox1
+            // txtLogDir
             // 
-            this.textBox1.Location = new System.Drawing.Point(85, 27);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(202, 20);
-            this.textBox1.TabIndex = 1;
+            this.txtLogDir.Location = new System.Drawing.Point(85, 27);
+            this.txtLogDir.Name = "txtLogDir";
+            this.txtLogDir.Size = new System.Drawing.Size(202, 20);
+            this.txtLogDir.TabIndex = 1;
             // 
             // lblLogDir
             // 
@@ -259,8 +259,8 @@
             this.tabContainer.ResumeLayout(false);
             this.tabGeneral.ResumeLayout(false);
             this.tabGeneral.PerformLayout();
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
+            this.tabLogging.ResumeLayout(false);
+            this.tabLogging.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -280,9 +280,9 @@
         private System.Windows.Forms.Label lblPHPPath;
         private System.Windows.Forms.TextBox txtPHPPath;
         private System.Windows.Forms.Button btnBrowsePHP;
-        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabLogging;
         private System.Windows.Forms.Button btnLogDir;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtLogDir;
         private System.Windows.Forms.Label lblLogDir;
         private System.Windows.Forms.CheckBox chkEnableLogs;
     }
