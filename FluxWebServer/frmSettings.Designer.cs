@@ -32,7 +32,7 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnBrowsePubFldr = new System.Windows.Forms.Button();
-            this.txtHttpDir = new System.Windows.Forms.TextBox();
+            this.txtHTTPDir = new System.Windows.Forms.TextBox();
             this.lblHttpDirText = new System.Windows.Forms.Label();
             this.lblPort = new System.Windows.Forms.Label();
             this.numPort = new System.Windows.Forms.NumericUpDown();
@@ -83,13 +83,13 @@
             this.btnBrowsePubFldr.UseVisualStyleBackColor = true;
             this.btnBrowsePubFldr.Click += new System.EventHandler(this.btnBrowse_Click);
             // 
-            // txtHttpDir
+            // txtHTTPDir
             // 
-            this.txtHttpDir.Location = new System.Drawing.Point(83, 10);
-            this.txtHttpDir.Name = "txtHttpDir";
-            this.txtHttpDir.ReadOnly = true;
-            this.txtHttpDir.Size = new System.Drawing.Size(206, 20);
-            this.txtHttpDir.TabIndex = 8;
+            this.txtHTTPDir.Location = new System.Drawing.Point(83, 10);
+            this.txtHTTPDir.Name = "txtHTTPDir";
+            this.txtHTTPDir.ReadOnly = true;
+            this.txtHTTPDir.Size = new System.Drawing.Size(206, 20);
+            this.txtHTTPDir.TabIndex = 8;
             // 
             // lblHttpDirText
             // 
@@ -151,7 +151,7 @@
             this.tabGeneral.Controls.Add(this.txtPHPPath);
             this.tabGeneral.Controls.Add(this.btnBrowsePHP);
             this.tabGeneral.Controls.Add(this.lblHttpDirText);
-            this.tabGeneral.Controls.Add(this.txtHttpDir);
+            this.tabGeneral.Controls.Add(this.txtHTTPDir);
             this.tabGeneral.Controls.Add(this.btnBrowsePubFldr);
             this.tabGeneral.Controls.Add(this.numPort);
             this.tabGeneral.Controls.Add(this.lblPort);
@@ -270,7 +270,7 @@
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnBrowsePubFldr;
-        private System.Windows.Forms.TextBox txtHttpDir;
+        private System.Windows.Forms.TextBox txtHTTPDir;
         private System.Windows.Forms.Label lblHttpDirText;
         private System.Windows.Forms.Label lblPort;
         private System.Windows.Forms.NumericUpDown numPort;

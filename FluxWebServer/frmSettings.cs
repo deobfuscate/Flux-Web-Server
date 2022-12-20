@@ -17,7 +17,7 @@ namespace FluxWebServer {
             port = Properties.Settings.Default.port;
 
             if (httpDir != null) {
-                txtHttpDir.Text = httpDir;
+                txtHTTPDir.Text = httpDir;
             }
             if (phpPath != null) {
                 txtPHPPath.Text = phpPath;
@@ -33,7 +33,7 @@ namespace FluxWebServer {
         private void btnBrowse_Click(object sender, EventArgs e) {
             DialogResult dlgResult = dirDialog.ShowDialog();
             if (dlgResult == DialogResult.OK) {
-                txtHttpDir.Text = dirDialog.SelectedPath.TrimEnd('\\');
+                txtHTTPDir.Text = dirDialog.SelectedPath.TrimEnd('\\');
             }
         }
 
@@ -45,7 +45,7 @@ namespace FluxWebServer {
         }
 
         private void btnSave_Click(object sender, EventArgs e) {
-            Properties.Settings.Default.httpDir = txtHttpDir.Text;
+            Properties.Settings.Default.httpDir = txtHTTPDir.Text;
             Properties.Settings.Default.phpPath = txtPHPPath.Text;
             Properties.Settings.Default.port = (int)numPort.Value;
             Properties.Settings.Default.Save();
