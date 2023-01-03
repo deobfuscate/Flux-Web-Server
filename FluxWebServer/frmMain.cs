@@ -2,7 +2,6 @@
 using System.Windows.Forms;
 using System.Drawing;
 using System.IO;
-using System.Runtime.InteropServices;
 
 namespace FluxWebServer {
     public partial class frmMain : Form {
@@ -82,11 +81,13 @@ namespace FluxWebServer {
             if (form.DialogResult == DialogResult.OK)
                 updateSettings();
         }
+
         private void updateSettings() {
             path = Properties.Settings.Default.httpDir;
             port = Properties.Settings.Default.port;
             phpPath = Properties.Settings.Default.phpPath;
         }
+
         private void exitToolStripMenuItem_Click(object sender, EventArgs e) {
             Application.Exit();
         }
