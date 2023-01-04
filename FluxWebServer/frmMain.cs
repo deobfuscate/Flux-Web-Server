@@ -66,10 +66,6 @@ namespace FluxWebServer {
             lblUptime.Text = tsTime.ToString(@"hh\:mm\:ss");
         }
 
-        public void Log(string text) {
-            txtLog.AppendText($"[{DateTime.Now}] {text}{Environment.NewLine}");
-        }
-
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e) {
             if (isRunning) {
                 MessageBox.Show("Cannot change settings while server is running.", "Error");
@@ -92,12 +88,16 @@ namespace FluxWebServer {
             Application.Exit();
         }
 
-        void Log(object sender, LogMessageEventArgs e) {
+        private void Log(object sender, LogMessageEventArgs e) {
             Log(e.Message);
+        }
+
+        public void Log(string text) {
+            txtLog.AppendText($"[{DateTime.Now}] {text}{Environment.NewLine}");
         }
     }
 
-    static class Program {
+    public static class Program {
         [STAThread]
         static void Main() {
             Application.EnableVisualStyles();
