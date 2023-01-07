@@ -93,16 +93,19 @@ namespace FluxWebServer {
                         string payload = string.Join("\r\n\r\n", data.Split(new string[] { "\r\n\r\n" }, StringSplitOptions.None).Skip(1));
                         phpResult = ExecPHP(path + strFilePath.Replace("/", @"\"), strFilePath, strDataW[0], phpPath, payload);
                     }
-                    else
+                    else {
                         phpResult = ExecPHP(path + strFilePath.Replace("/", @"\"), strFilePath, strDataW[0], phpPath);
+                    }
                     string[] words = phpResult.Split(new string[] { "\r\n\r\n" }, StringSplitOptions.None);
                     string headers = words.First();
                     string content = string.Join("\r\n\r\n", words.Skip(1));
                     bContent = Encoding.UTF8.GetBytes(content);
-                    if (headers.Contains("Location: "))
+                    if (headers.Contains("Location: ")) {
                         bHeader = Encoding.UTF8.GetBytes($"HTTP/1.1 302 FOUND\r\n{headers}\r\nContent-Length: {bContent.Length}\r\n\r\n");
-                    else
+                    }
+                    else {
                         bHeader = Encoding.UTF8.GetBytes($"HTTP/1.1 200 OK\r\n{headers}\r\nContent-Length: {bContent.Length}\r\n\r\n");
+                    }
                 }
                 else {
                     try {
@@ -119,10 +122,12 @@ namespace FluxWebServer {
                         }
                     }
                     string contentType;
-                    if (mimeTypes.ContainsKey(GetExt(strFilePath)))
+                    if (mimeTypes.ContainsKey(GetExt(strFilePath))) {
                         contentType = mimeTypes[GetExt(strFilePath)];
-                    else
+                    }
+                    else {
                         contentType = "text/html";
+                    }
                     bHeader = Encoding.UTF8.GetBytes($"HTTP/1.1 200 OK\r\nContent-Type: {contentType}; charset=UTF-8\r\nContent-Length: {bContent.Length}\r\n\r\n");
                 }
 
