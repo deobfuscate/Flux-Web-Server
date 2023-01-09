@@ -14,6 +14,8 @@ namespace FluxWebServer {
         private string path, phpPath;
         private TcpListener tcpListener;
         private bool stoppingListener;
+        private static readonly List<string> modes = new List<string> { "GET", "POST", "PUT", "HEAD", "DELETE" };
+
         public event EventHandler<LogMessageEventArgs> LogMessage;
         Dictionary<string, string> mimeTypes = new Dictionary<string, string>() {
             {".zip", "application/zip"},
@@ -80,7 +82,6 @@ namespace FluxWebServer {
             #if DEBUG
                 Console.WriteLine($"<-- '{data}' from {tcpClient.Client.Handle} Len: {tcpClient.Available} bytes");
             #endif
-            List<string> modes = new List<string> { "GET", "POST", "PUT", "HEAD", "DELETE" };
             if (StartsWithLst(modes, data)) {
                 string[] strDataW = data.Split(new char[] { ' ' });
                 string strFilePath = strDataW[1];
