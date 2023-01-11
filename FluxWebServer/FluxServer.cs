@@ -44,10 +44,12 @@ namespace FluxWebServer {
                 tcpListener.Start();
             }
             catch (SocketException ex) {
-                if (ex.ErrorCode == 10048)
+                if (ex.ErrorCode == 10048) {
                     OnLogMessage(new LogMessageEventArgs("Error: Address is already in use, ensure that the port is open."));
-                else
+                }
+                else {
                     OnLogMessage(new LogMessageEventArgs($"Error: {ex}"));
+                }
                 return false;
             }
 
