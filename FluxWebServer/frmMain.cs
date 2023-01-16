@@ -74,8 +74,9 @@ namespace FluxWebServer {
 
             frmSettings form = new frmSettings();
             form.ShowDialog(this);
-            if (form.DialogResult == DialogResult.OK)
+            if (form.DialogResult == DialogResult.OK) {
                 updateSettings();
+            }
         }
 
         private void updateSettings() {
