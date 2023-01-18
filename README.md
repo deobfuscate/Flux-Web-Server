@@ -1,5 +1,5 @@
 # Flux Web Server
-A simple web server made in C#
+A simple web server made in C# using TCP sockets
 
 ## Features
 * Publish a directory to be viewable on the WWW
