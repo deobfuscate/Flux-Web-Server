@@ -13,5 +13,5 @@ A simple web server made in C# using TCP sockets
 
 
 ## Planned
-* Logging
+* Logging to disk
 * Extended PHP support with POST processing
