@@ -13,5 +13,6 @@ A simple web server made in C# using TCP sockets
 
 
 ## Planned
+* Custom Form Data Parser
 * Logging to disk
 * Extended PHP support with POST processing
