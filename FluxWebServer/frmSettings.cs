@@ -22,12 +22,8 @@ namespace FluxWebServer {
             if (phpPath != null) {
                 txtPHPPath.Text = phpPath;
             }
-
             if (port != 0) {
                 numPort.Value = Properties.Settings.Default.port;
-            }
-            else {
-                numPort.Value = 80;
             }
         }
         private void btnBrowse_Click(object sender, EventArgs e) {
