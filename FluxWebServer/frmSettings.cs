@@ -27,15 +27,15 @@ namespace FluxWebServer {
             }
         }
         private void btnBrowse_Click(object sender, EventArgs e) {
-            DialogResult dlgResult = dirDialog.ShowDialog();
-            if (dlgResult == DialogResult.OK) {
+            DialogResult result = dirDialog.ShowDialog();
+            if (result == DialogResult.OK) {
                 txtHTTPDir.Text = dirDialog.SelectedPath.TrimEnd('\\');
             }
         }
 
         private void btnBroowsePHP_Click(object sender, EventArgs e) {
-            DialogResult dlgResult = dirDialog.ShowDialog();
-            if (dlgResult == DialogResult.OK) {
+            DialogResult result = dirDialog.ShowDialog();
+            if (result == DialogResult.OK) {
                 txtPHPPath.Text = dirDialog.SelectedPath.TrimEnd('\\');
             }
         }
@@ -43,7 +43,7 @@ namespace FluxWebServer {
         private void btnSave_Click(object sender, EventArgs e) {
             Properties.Settings.Default.httpDir = txtHTTPDir.Text;
             Properties.Settings.Default.phpPath = txtPHPPath.Text;
-            Properties.Settings.Default.port = (int)numPort.Value;
+            Properties.Settings.Default.port = (int) numPort.Value;
             Properties.Settings.Default.Save();
             Close();
             DialogResult = DialogResult.OK;
