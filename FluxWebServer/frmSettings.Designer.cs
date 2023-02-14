@@ -47,6 +47,7 @@
             this.btnLogDir = new System.Windows.Forms.Button();
             this.txtLogDir = new System.Windows.Forms.TextBox();
             this.lblLogDir = new System.Windows.Forms.Label();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.numPort)).BeginInit();
             this.tabContainer.SuspendLayout();
             this.tabGeneral.SuspendLayout();
@@ -55,7 +56,7 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(84, 140);
+            this.btnSave.Location = new System.Drawing.Point(84, 158);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(103, 29);
             this.btnSave.TabIndex = 0;
@@ -65,7 +66,7 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(195, 140);
+            this.btnCancel.Location = new System.Drawing.Point(195, 158);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(103, 29);
             this.btnCancel.TabIndex = 1;
@@ -103,7 +104,7 @@
             // lblPort
             // 
             this.lblPort.AutoSize = true;
-            this.lblPort.Location = new System.Drawing.Point(34, 66);
+            this.lblPort.Location = new System.Drawing.Point(34, 87);
             this.lblPort.Name = "lblPort";
             this.lblPort.Size = new System.Drawing.Size(29, 13);
             this.lblPort.TabIndex = 10;
@@ -111,7 +112,7 @@
             // 
             // numPort
             // 
-            this.numPort.Location = new System.Drawing.Point(83, 64);
+            this.numPort.Location = new System.Drawing.Point(83, 85);
             this.numPort.Maximum = new decimal(new int[] {
             65535,
             0,
@@ -142,11 +143,12 @@
             this.tabContainer.Location = new System.Drawing.Point(12, 12);
             this.tabContainer.Name = "tabContainer";
             this.tabContainer.SelectedIndex = 0;
-            this.tabContainer.Size = new System.Drawing.Size(368, 121);
+            this.tabContainer.Size = new System.Drawing.Size(368, 139);
             this.tabContainer.TabIndex = 12;
             // 
             // tabGeneral
             // 
+            this.tabGeneral.Controls.Add(this.checkBox1);
             this.tabGeneral.Controls.Add(this.lblPHPPath);
             this.tabGeneral.Controls.Add(this.txtPHPPath);
             this.tabGeneral.Controls.Add(this.btnBrowsePHP);
@@ -158,7 +160,7 @@
             this.tabGeneral.Location = new System.Drawing.Point(4, 22);
             this.tabGeneral.Name = "tabGeneral";
             this.tabGeneral.Padding = new System.Windows.Forms.Padding(3);
-            this.tabGeneral.Size = new System.Drawing.Size(360, 95);
+            this.tabGeneral.Size = new System.Drawing.Size(360, 113);
             this.tabGeneral.TabIndex = 0;
             this.tabGeneral.Text = "General";
             this.tabGeneral.UseVisualStyleBackColor = true;
@@ -166,7 +168,7 @@
             // lblPHPPath
             // 
             this.lblPHPPath.AutoSize = true;
-            this.lblPHPPath.Location = new System.Drawing.Point(6, 41);
+            this.lblPHPPath.Location = new System.Drawing.Point(6, 62);
             this.lblPHPPath.Name = "lblPHPPath";
             this.lblPHPPath.Size = new System.Drawing.Size(57, 13);
             this.lblPHPPath.TabIndex = 12;
@@ -174,7 +176,7 @@
             // 
             // txtPHPPath
             // 
-            this.txtPHPPath.Location = new System.Drawing.Point(83, 38);
+            this.txtPHPPath.Location = new System.Drawing.Point(83, 59);
             this.txtPHPPath.Name = "txtPHPPath";
             this.txtPHPPath.ReadOnly = true;
             this.txtPHPPath.Size = new System.Drawing.Size(206, 20);
@@ -182,7 +184,7 @@
             // 
             // btnBrowsePHP
             // 
-            this.btnBrowsePHP.Location = new System.Drawing.Point(295, 35);
+            this.btnBrowsePHP.Location = new System.Drawing.Point(295, 56);
             this.btnBrowsePHP.Name = "btnBrowsePHP";
             this.btnBrowsePHP.Size = new System.Drawing.Size(61, 25);
             this.btnBrowsePHP.TabIndex = 14;
@@ -239,11 +241,21 @@
             this.lblLogDir.TabIndex = 0;
             this.lblLogDir.Text = "Log Directory:";
             // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(83, 36);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(124, 17);
+            this.checkBox1.TabIndex = 15;
+            this.checkBox1.Text = "Enable PHP Support";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
             // frmSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(392, 178);
+            this.ClientSize = new System.Drawing.Size(392, 196);
             this.Controls.Add(this.tabContainer);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
@@ -285,5 +297,6 @@
         private System.Windows.Forms.TextBox txtLogDir;
         private System.Windows.Forms.Label lblLogDir;
         private System.Windows.Forms.CheckBox chkEnableLogs;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }
