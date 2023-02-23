@@ -39,6 +39,7 @@
             this.dirDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.tabContainer = new System.Windows.Forms.TabControl();
             this.tabGeneral = new System.Windows.Forms.TabPage();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.lblPHPPath = new System.Windows.Forms.Label();
             this.txtPHPPath = new System.Windows.Forms.TextBox();
             this.btnBrowsePHP = new System.Windows.Forms.Button();
@@ -47,7 +48,6 @@
             this.btnLogDir = new System.Windows.Forms.Button();
             this.txtLogDir = new System.Windows.Forms.TextBox();
             this.lblLogDir = new System.Windows.Forms.Label();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.numPort)).BeginInit();
             this.tabContainer.SuspendLayout();
             this.tabGeneral.SuspendLayout();
@@ -165,6 +165,17 @@
             this.tabGeneral.Text = "General";
             this.tabGeneral.UseVisualStyleBackColor = true;
             // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(83, 36);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(124, 17);
+            this.checkBox1.TabIndex = 15;
+            this.checkBox1.Text = "Enable PHP Support";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
             // lblPHPPath
             // 
             this.lblPHPPath.AutoSize = true;
@@ -176,6 +187,7 @@
             // 
             // txtPHPPath
             // 
+            this.txtPHPPath.Enabled = false;
             this.txtPHPPath.Location = new System.Drawing.Point(83, 59);
             this.txtPHPPath.Name = "txtPHPPath";
             this.txtPHPPath.ReadOnly = true;
@@ -184,6 +196,7 @@
             // 
             // btnBrowsePHP
             // 
+            this.btnBrowsePHP.Enabled = false;
             this.btnBrowsePHP.Location = new System.Drawing.Point(295, 56);
             this.btnBrowsePHP.Name = "btnBrowsePHP";
             this.btnBrowsePHP.Size = new System.Drawing.Size(61, 25);
@@ -201,7 +214,7 @@
             this.tabLogging.Location = new System.Drawing.Point(4, 22);
             this.tabLogging.Name = "tabLogging";
             this.tabLogging.Padding = new System.Windows.Forms.Padding(3);
-            this.tabLogging.Size = new System.Drawing.Size(360, 95);
+            this.tabLogging.Size = new System.Drawing.Size(360, 113);
             this.tabLogging.TabIndex = 1;
             this.tabLogging.Text = "Logging";
             this.tabLogging.UseVisualStyleBackColor = true;
@@ -240,16 +253,6 @@
             this.lblLogDir.Size = new System.Drawing.Size(73, 13);
             this.lblLogDir.TabIndex = 0;
             this.lblLogDir.Text = "Log Directory:";
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(83, 36);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(124, 17);
-            this.checkBox1.TabIndex = 15;
-            this.checkBox1.Text = "Enable PHP Support";
-            this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // frmSettings
             // 

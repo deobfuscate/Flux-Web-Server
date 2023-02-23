@@ -52,5 +52,16 @@ namespace FluxWebServer {
         private void btnCancel_Click(object sender, EventArgs e) {
             Close();
         }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e) {
+            if (checkBox1.Checked) {
+                txtPHPPath.Enabled = true;
+                btnBrowsePHP.Enabled = true;
+            } 
+            else {
+                txtPHPPath.Enabled = false;
+                btnBrowsePHP.Enabled = false;
+            }
+        }
     }
 }
