@@ -70,5 +70,17 @@ namespace FluxWebServer.Properties {
                 this["phpEnabled"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool logging {
+            get {
+                return ((bool)(this["logging"]));
+            }
+            set {
+                this["logging"] = value;
+            }
+        }
     }
 }
