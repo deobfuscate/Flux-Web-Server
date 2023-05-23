@@ -62,8 +62,7 @@ namespace FluxWebServer {
 
         private void tmrUptime_Tick(object sender, EventArgs e) {
             uptime++;
-            TimeSpan tsTime = TimeSpan.FromSeconds(uptime);
-            lblUptime.Text = tsTime.ToString(@"hh\:mm\:ss");
+            lblUptime.Text = TimeSpan.FromSeconds(uptime).ToString(@"hh\:mm\:ss");
         }
 
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e) {
