@@ -26,6 +26,7 @@ namespace FluxWebServer {
                 numPort.Value = Properties.Settings.Default.port;
             }
         }
+
         private void btnBrowse_Click(object sender, EventArgs e) {
             DialogResult result = dirDialog.ShowDialog();
             if (result == DialogResult.OK) {
