@@ -10,6 +10,7 @@ using System.Text;
 
 namespace FluxWebServer {
     class FluxServer {
+        private const int ERROR_IN_USE = 10048;
         private int port;
         private string path, phpPath;
         private TcpListener tcpListener;
@@ -44,7 +45,7 @@ namespace FluxWebServer {
                 tcpListener.Start();
             }
             catch (SocketException ex) {
-                if (ex.ErrorCode == 10048) {
+                if (ex.ErrorCode == ERROR_IN_USE) {
                     OnLogMessage(new LogMessageEventArgs("Error: Address is already in use, ensure that the port is open."));
                 }
                 else {
